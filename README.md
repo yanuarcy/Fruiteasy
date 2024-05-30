@@ -1,6 +1,6 @@
 # Fruiteasy
     # Get the Model
-     to get the model you can access this <a href="https://drive.google.com/file/d/13zmZbcBgRFDxqe2cwvHEGKHUf27gCXGG/view?usp=sharing">links</a>
+     
 # Summary
 According to the World Health Organization (WHO), the recommended daily consumption of fruits for a healthier life is 400 grams per person. However, in Indonesia, the average consumption stands at only 81.14 grams per capita per day (BPS, 2021). This figure represents just 54.09% of the minimum nutritional adequacy threshold set by the WHO. The public struggles with fruit selection due to limited awareness of their nutritional benefits, leading to repetitive choices and potential health deficiencies. This lack of diversity in fruit consumption is highlighted by WHO and BPS (2021) data. Embracing more natural fruit options could effectively address health concerns by reducing chemical intake and promoting overall well-being.
 

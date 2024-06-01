@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.dicoding.fruiteasy.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_scanner"
+        android:name="com.dicoding.fruiteasy.ui.scanner.ScannerFragment"
         android:label="@string/title_scanner"
-        tools:layout="@layout/fragment_dashboard"
+        tools:layout="@layout/fragment_scanner"
         />
 
     <fragment

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <!-- Camera preview surface -->
+    <SurfaceView
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Back button -->
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:clickable="true"
+        android:contentDescription="Back"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_chevronleft_24" />
+
+    <!-- Scanner title -->
+    <TextView
+        android:id="@+id/scanner_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Scanner"
+        android:textSize="18sp"
+        android:textColor="@android:color/white" />
+
+    <!-- Scanner overlay -->
+    <ImageView
+        android:id="@+id/scanner_overlay"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:contentDescription="scanner_rectangle"
+        android:scaleType="fitCenter"
+        android:src="@drawable/scanner_rectangle" />
+
+    <!-- Identify button -->
+    <ImageView
+        android:id="@+id/identify_button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:clickable="true"
+        android:contentDescription="Identify Button"
+        android:focusable="true"
+        android:src="@drawable/scanner_button" />
+
+    <!-- Identify label -->
+    <TextView
+        android:id="@+id/identify_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/identify_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:text="Identify"
+        android:textSize="18sp"
+        android:textColor="@android:color/white" />
+
+    <!-- Gallery button -->
+    <ImageView
+        android:id="@+id/gallery_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/upload_photo"
+        android:contentDescription="gallery"
+        android:clickable="true"
+        android:focusable="true" />
+</RelativeLayout>

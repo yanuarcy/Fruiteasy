@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".OnBoardingActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        app:srcCompat="@drawable/img_onboarding" />
+
+    <TextView
+        android:id="@+id/titleOnBoarding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingHorizontal="60dp"
+        android:text="@string/title_onboarding"
+        android:textColor="@color/orange"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descOnBoarding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:paddingHorizontal="60dp"
+        android:text="@string/desc_onboarding"
+        android:textColor="@color/primary"
+        android:textSize="20sp" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:layout_marginTop="45dp">
+
+        <Button
+            android:id="@+id/Login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="80dp"
+            android:backgroundTint="@color/btnColor"
+            android:text="@string/Login"
+            android:textAllCaps="false"
+            android:paddingLeft="30dp"
+            android:paddingTop="12dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="12dp"
+            android:textSize="20sp"
+            app:cornerRadius="8dp" />
+
+        <Button
+            android:id="@+id/Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:backgroundTint="@color/Gray"
+            android:text="@string/Register"
+            android:textAllCaps="false"
+            android:paddingLeft="30dp"
+            android:paddingTop="12dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="12dp"
+            android:textSize="20sp"
+            app:cornerRadius="8dp"
+            android:textColor="@color/black" />
+    </FrameLayout>
+
+
+</LinearLayout>

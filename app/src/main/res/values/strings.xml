@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Fruiteasy</string>
+    <string name="title_home">Home</string>
+    <string name="title_scanner">Scanner</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_onboarding">how`s your health today</string>
+    <string name="desc_onboarding">An ounce of prevention is worth a pound of cure</string>
+    <string name="Login">Login</string>
+    <string name="Register">Register</string>
+    <string name="title_login">Login Here</string>
+    <string name="secondTitle_login">Welcome back, you`ve been missed!</string>
+    <string name="title_register">Create Account</string>
+    <string name="secondTitle_register">Create an Account, Cherish your Health</string>
+    <string name="new_account">Create a new account</string>
+    <string name="alrHave_account">Already have an account</string>
+    <string name="forgot_linkText">Forgot your password?</string>
+</resources>

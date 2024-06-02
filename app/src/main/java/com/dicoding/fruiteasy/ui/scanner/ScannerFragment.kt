@@ -1,44 +1,65 @@
-@file:Suppress("DEPRECATION")
-
 package com.dicoding.fruiteasy.ui.scanner
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.hardware.Camera
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.OrientationEventListener
 import android.view.Surface
-import android.view.SurfaceHolder
-import android.view.SurfaceView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.dicoding.fruiteasy.AnalyzingScannerActivity
+import com.dicoding.fruiteasy.AnalyzingScannerActivity.Companion.CAMERAX_RESULT
+import com.dicoding.fruiteasy.createCustomTempFile
 import com.dicoding.fruiteasy.databinding.FragmentScannerBinding
+import com.dicoding.fruiteasy.getImageUri
+import java.io.File
 
-@Suppress("DEPRECATION")
-class ScannerFragment : Fragment(), SurfaceHolder.Callback {
+class ScannerFragment : Fragment() {
 
     private var _binding: FragmentScannerBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var surfaceView: SurfaceView
-    private lateinit var surfaceHolder: SurfaceHolder
-    private var camera: Camera? = null
-    private lateinit var identifyButton: ImageView
-    private lateinit var backButton: ImageView
-    private lateinit var galleryButton: ImageView
+    private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private var imageCapture: ImageCapture? = null
+    private var currentImageUri: Uri? = null
     private val scannerViewModel: ScannerViewModel by activityViewModels()
 
-    private val REQUEST_CAMERA_PERMISSION = 100
-    private val REQUEST_GALLERY_IMAGE = 101
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(requireContext(), "Permission request granted", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(requireContext(), "Permission request denied", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    private fun allPermissionsGranted() =
+        ContextCompat.checkSelfPermission(
+            requireContext(),
+            REQUIRED_PERMISSION
+        ) == PackageManager.PERMISSION_GRANTED
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,31 +69,13 @@ class ScannerFragment : Fragment(), SurfaceHolder.Callback {
         _binding = FragmentScannerBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        surfaceView = binding.cameraPreview
-        identifyButton = binding.identifyButton
-        backButton = binding.backButton
-        galleryButton = binding.galleryButton
-
-        surfaceHolder = surfaceView.holder
-        surfaceHolder.addCallback(this)
-
-        identifyButton.setOnClickListener {
-            // Handle Identify button click
-            Toast.makeText(requireContext(), "Identify clicked", Toast.LENGTH_SHORT).show()
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
-        backButton.setOnClickListener {
-            // Handle Back button click
-            requireActivity().onBackPressed()
-        }
-
-        galleryButton.setOnClickListener {
-            // Handle Gallery button click
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, REQUEST_GALLERY_IMAGE)
-        }
-
-//        scannerViewModel.setBottomNavVisible(false)
+        binding.backButton.setOnClickListener { requireActivity().onBackPressed() }
+        binding.galleryButton.setOnClickListener { startGallery() }
+        binding.identifyButton.setOnClickListener { takePhoto() }
 
         return root
     }
@@ -82,86 +85,154 @@ class ScannerFragment : Fragment(), SurfaceHolder.Callback {
         scannerViewModel.hideBottomNav()
     }
 
-    override fun surfaceCreated(holder: SurfaceHolder) {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_GRANTED) {
-            startCamera()
-        } else {
-            ActivityCompat.requestPermissions(requireActivity(),
-                arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSION)
-        }
-    }
 
-    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        // Handle surface changes if needed
-    }
-
-    override fun surfaceDestroyed(holder: SurfaceHolder) {
-        stopCamera()
+    override fun onResume() {
+        super.onResume()
+//        hideSystemUI()
+        startCamera()
     }
 
     private fun startCamera() {
-        camera = Camera.open()
-        camera?.apply {
-            setPreviewDisplay(surfaceHolder)
-            setCameraDisplayOrientation()
-            startPreview()
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+
+        cameraProviderFuture.addListener({
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                }
+
+            imageCapture = ImageCapture.Builder().build()
+
+            try {
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(
+                    this,
+                    cameraSelector,
+                    preview,
+                    imageCapture
+                )
+
+            } catch (exc: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Gagal memunculkan kamera.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.e(TAG, "startCamera: ${exc.message}")
+            }
+        }, ContextCompat.getMainExecutor(requireContext()))
+    }
+
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+
+        val photoFile = createCustomTempFile(requireContext())
+
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        imageCapture.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(requireContext()),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    val savedUri = Uri.fromFile(photoFile)
+                    currentImageUri = savedUri
+                    val msg = "Photo saved"
+
+                    Toast.makeText(requireContext(), "$msg $savedUri", Toast.LENGTH_LONG).show()
+                    val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
+                    intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
+                    startActivity(intent)
+                }
+
+                override fun onError(exc: ImageCaptureException) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Gagal mengambil gambar.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e(TAG, "onError: ${exc.message}")
+                }
+            }
+        )
+    }
+
+//    private fun hideSystemUI() {
+//        @Suppress("DEPRECATION")
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            window.insetsController?.hide(WindowInsets.Type.statusBars())
+//        } else {
+//            window.setFlags(
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN
+//            )
+//        }
+//        supportActionBar?.hide()
+//    }
+
+    private val orientationEventListener by lazy {
+        object : OrientationEventListener(requireContext()) {
+            override fun onOrientationChanged(orientation: Int) {
+                if (orientation == ORIENTATION_UNKNOWN) {
+                    return
+                }
+
+                val rotation = when (orientation) {
+                    in 45 until 135 -> Surface.ROTATION_270
+                    in 135 until 225 -> Surface.ROTATION_180
+                    in 225 until 315 -> Surface.ROTATION_90
+                    else -> Surface.ROTATION_0
+                }
+
+                imageCapture?.targetRotation = rotation
+            }
         }
     }
 
-    private fun stopCamera() {
-        camera?.apply {
-            stopPreview()
-            release()
-        }
-        camera = null
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
-    private fun setCameraDisplayOrientation() {
-        val rotation = requireActivity().windowManager.defaultDisplay.rotation
-        val degrees = when (rotation) {
-            Surface.ROTATION_0 -> 0
-            Surface.ROTATION_90 -> 90
-            Surface.ROTATION_180 -> 180
-            Surface.ROTATION_270 -> 270
-            else -> 0
-        }
-
-        val info = Camera.CameraInfo()
-        Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info)
-
-        val result: Int
-        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-            val tempResult = (info.orientation + degrees) % 360
-            result = (360 - tempResult) % 360  // compensate the mirror
-        } else {  // back-facing
-            result = (info.orientation - degrees + 360) % 360
-        }
-
-        camera?.setDisplayOrientation(result)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == REQUEST_CAMERA_PERMISSION && grantResults.isNotEmpty()
-            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startCamera()
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            currentImageUri = uri
+            val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
+            intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
+            startActivity(intent)
         } else {
-            Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT).show()
+            Log.d("Photo Picker", "No media selected")
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_GALLERY_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
-            val selectedImage = data.data
-            // Handle the selected image from the gallery
+    private fun showImage() {
+        currentImageUri?.let {
+            Log.d("Image URI", "showImage: $it")
+            binding.scannerOverlay.setImageURI(it)
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onStart() {
+        super.onStart()
+        orientationEventListener.enable()
+        scannerViewModel.hideBottomNav()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        orientationEventListener.disable()
         scannerViewModel.showBottomNav()
     }
+
+    companion object {
+        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
+        const val CAMERAX_RESULT = 200
+        private const val TAG = "ScannerFragment"
+    }
 }
+
+

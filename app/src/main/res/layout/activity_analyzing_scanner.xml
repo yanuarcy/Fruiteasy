@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+    <!-- Blurred background image -->
+    <ImageView
+        android:id="@+id/captured_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="imageresult"
+        android:scaleType="centerCrop" />
+
+    <!-- Scanner overlay -->
+    <ImageView
+        android:id="@+id/bingkai_scanner_overlay"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:contentDescription="scanner_rectangle"
+        android:scaleType="fitCenter"
+        android:src="@drawable/scanner_rectangle" />
+
+    <!-- Scanner overlay -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/scanner_overlay"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        app:shapeAppearanceOverlay="@style/circular"
+        android:contentDescription="scanner_rectangle"
+        android:scaleType="fitCenter"
+        android:src="@drawable/scanner_rectangle" />
+
+    <!-- Scanning message -->
+    <TextView
+        android:id="@+id/scanning_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bingkai_scanner_overlay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:text="Scanning..."
+        android:textSize="18sp"
+        android:textColor="@android:color/white" />
+
+    <!-- Loading steps -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scanning_message"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_1"
+            app:lottie_autoPlay="true"
+            android:layout_height="26dp"
+            android:layout_width="26dp"
+            android:layout_marginBottom="-25dp"
+            app:lottie_loop="true"
+            app:lottie_speed="1"
+            app:lottie_cacheComposition="true"
+            app:lottie_rawRes="@raw/loading_new" />
+
+        <TextView
+            android:id="@+id/analyzing_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Analyzing image"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="32dp"
+            android:drawablePadding="8dp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_2"
+            app:lottie_autoPlay="true"
+            android:layout_height="26dp"
+            android:layout_width="26dp"
+            android:layout_marginBottom="-30dp"
+            app:lottie_loop="true"
+            app:lottie_speed="1"
+            app:lottie_cacheComposition="true"
+            app:lottie_rawRes="@raw/loading_new" />
+
+        <TextView
+            android:id="@+id/detecting_leaves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detecting fruit structure"
+            android:textSize="16sp"
+            android:layout_marginLeft="32dp"
+            android:textColor="@android:color/white"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="8dp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_3"
+            app:lottie_autoPlay="true"
+            android:layout_height="26dp"
+            android:layout_width="26dp"
+            android:layout_marginBottom="-32dp"
+            app:lottie_loop="true"
+            app:lottie_speed="1"
+            app:lottie_cacheComposition="true"
+            app:lottie_rawRes="@raw/loading_new" />
+
+        <TextView
+            android:id="@+id/identifying_plant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Identifying fruit"
+            android:textSize="16sp"
+            android:layout_marginLeft="32dp"
+            android:textColor="@android:color/white"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <!-- Horizontal green line -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/scanner_line"
+        app:lottie_autoPlay="true"
+        android:layout_height="250dp"
+        android:layout_width="250dp"
+        android:layout_marginTop="260dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_loop="true"
+        app:lottie_speed="1"
+        app:lottie_cacheComposition="true"
+        app:lottie_rawRes="@raw/scanner_line" />
+
+</RelativeLayout>

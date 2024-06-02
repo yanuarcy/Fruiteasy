@@ -4,9 +4,9 @@ from PIL import Image
 from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
 
 # Define the path to the parent directory
-parent_262_directory = './CombinedV4/262'       # parent direktori dari dataset
-parent_360_directory = './CombinedV4/360'
-tempor_folder = './Complete-ready-to-useV2/'    # parent direktori dari cleaning dataset
+parent_262_directory = './CombinedV5/262'       # parent direktori dari dataset
+parent_360_directory = './CombinedV5/360'
+tempor_folder = './Complete-ready-to-useV3/'    # parent direktori dari cleaning dataset
 IMAGE_SIZE = 224
 
 # List to store the directory names
@@ -29,10 +29,10 @@ for item in os.listdir(parent_360_directory):
 
 # prepare datagen generator
 train_datagen = ImageDataGenerator(
-    rotation_range=20,
+    rotation_range=90,
     # width_shift_range=0.2,
     # height_shift_range=0.2,
-    shear_range=0.2,
+    # shear_range=0.2,
     zoom_range=0.2,
     horizontal_flip=True,
     vertical_flip=True, 

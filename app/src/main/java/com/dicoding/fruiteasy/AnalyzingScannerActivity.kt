@@ -1,6 +1,7 @@
 package com.dicoding.fruiteasy
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -146,6 +147,10 @@ class AnalyzingScannerActivity : AppCompatActivity() {
                         currentStep++
                         handler.post(this)
                     }, 2000)
+                } else {
+                    // All steps are completed, start the new activity
+                    val intent = Intent(this@AnalyzingScannerActivity, DetailInformationScannerActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }

@@ -58,10 +58,15 @@ router.post('/signup', async (req, res) => {
 
   try {
     const usersRef = db.collection('users');
-    const snapshot = await usersRef.where('email', '==', email).get();
+    const snapshotEmail = await usersRef.where('email', '==', email).get();
+    const snapshotUsername = await usersRef.where('username', '==', username).get();
 
-    if (!snapshot.empty) {
+    if (!snapshotEmail.empty) {
       return res.status(400).send('Email already in use');
+    }
+
+    if (!snapshotUsername.empty) {
+      return res.status(400).send('Username already in use');
     }
 
     await usersRef.add(newUser);

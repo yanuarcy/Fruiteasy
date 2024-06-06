@@ -74,16 +74,16 @@ router.post('/signup', async (req, res) => {
 // Endpoint to login
 router.post('/login', async (req, res) => {
   try {
-    const { emailOrFullName, password } = req.body;
+    const { emailOrUsername, password } = req.body;
 
     // Validasi input
-    if (!emailOrFullName || !password) {
+    if (!emailOrUsername || !password) {
         return res.status(400).json({ error: 'Please enter all data correctly' });
     }
 
     // Verifikasi kredensial
-    const emailSnapshot = await db.collection("users").where("email", "==", emailOrFullName).get();
-    const usernameSnapshot = await db.collection("users").where("fullName", "==", emailOrFullName).get();
+    const emailSnapshot = await db.collection("users").where("email", "==", emailOrUsername).get();
+    const usernameSnapshot = await db.collection("users").where("username", "==", emailOrUsername).get();
 
     const combinedSnapshot = emailSnapshot.docs.concat(usernameSnapshot.docs);
 

@@ -38,8 +38,7 @@ const verifyToken = async (req, res, next) => {
 // Endpoint to create a new user
 router.post('/signup', async (req, res) => {
   const { username, email, phone, password, confirmPassword } = req.body;
-  const fullName = username;
-
+  
   if (password !== confirmPassword) {
     return res.status(400).send('Passwords do not match');
   }
@@ -48,12 +47,16 @@ router.post('/signup', async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const newUser = {
-    username,
-    userID,
-    fullName,
-    email,
-    phone,
+    id: userID,
+    username: username,
+    email: email,
+    phone: phone,
     password: hashedPassword,
+    fullName: username,
+    gender: "",
+    dateOfBirth: "",
+    address: "",
+    cities:"",
   };
 
   try {

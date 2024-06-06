@@ -150,40 +150,43 @@ router.post('/request-reset-password', async (req, res) => {
 
 // Endpoint to reset password
 router.post('/reset-password', verifyToken, async (req, res) => {
-  const { userIdLocal, currentPassword, newPassword, confirmNewPassword } = req.body;
+  const { uidLocal, currentPassword, newPassword, confirmNewPassword } = req.body;
 
   // Validasi input
   if (!currentPassword || !newPassword || !confirmNewPassword) {
     return res.status(400).json({ error: 'Please enter all data correctly' });
   }
 
-  if (newPassword !== confirmNewPassword) {
-    return res.status(400).send('New passwords do not match');
-  }
-
   try {
-    const userCollection = await db.collection('users');
-    const userDocRef = doc (userCollection, userIdLocal);
+    if (newPassword !== confirmNewPassword) {
+      return res.status(400).send('New passwords do not match');
+    }
 
-    await updateDoc(userDocRef, {password: hashedNewPassword});
-
-    if (userSnapshot.empty) {
+    const userDocRef = db.collection("users").doc(uidLocal);
+    const userDocSnapshot = await userDocRef.get();
+  
+    if (!userDocSnapshot.exists) {
       return res.status(404).json({ error: 'User not found' });
     }
-  
-    const user = userSnapshot.docs[0].data();
+    
+    const user = userDocSnapshot.data();
     const userPassword = user.password;
     const isPasswordValid = await bcrypt.compare(currentPassword, userPassword);
-  
+    
     if (!isPasswordValid) {
       return res.status(400).send('Current password is incorrect');
     }
-  
+
+    const isNewPasswordSameAsOld = await bcrypt.compare(newPassword, userPassword);
+
+    if (isNewPasswordSameAsOld) {
+      return res.status(400).send('New password must be different from old password');
+    }
+    
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
     
-    // Update kata sandi pengguna
-    await db.collection("users").doc(userSnapshot.docs[0].id).update({ password: hashedNewPassword });
-
+    // Update user password
+    await userDocRef.update({ password: hashedNewPassword });
     res.status(200).send('Password changed successfully');
   } catch (error) {
     res.status(500).send('Error changing password: ' + error.message);

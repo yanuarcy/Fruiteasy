@@ -39,6 +39,10 @@ const verifyToken = async (req, res, next) => {
 router.post('/signup', async (req, res) => {
   const { username, email, phone, password, confirmPassword } = req.body;
   
+  if (!username || !email || !phone || !password || !confirmPassword) {
+    return res.status(400).json({ error: 'Please enter all data correctly' });
+  }
+
   if (password !== confirmPassword) {
     return res.status(400).send('Passwords do not match');
   }
@@ -67,7 +71,11 @@ router.post('/signup', async (req, res) => {
       return res.status(400).send('Email already in use');
     }
 
-    await usersRef.add(newUser);
+    const newDoc = await usersRef.add(newUser);
+    const uid = newDoc.id;
+    const userDocRef = db.collection('users').doc(uid);
+        
+    await userDocRef.set({ ...newUser, uid: uid });
     res.status(201).send('User created successfully');
   } catch (error) {
     res.status(500).send('Error creating user: ' + error.message);

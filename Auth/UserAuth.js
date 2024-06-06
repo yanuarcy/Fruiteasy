@@ -137,9 +137,9 @@ router.post('/request-reset-password', async (req, res) => {
   }
 });
 
-// Endpoint to change password
-router.post('/change-password', verifyToken, async (req, res) => {
-  const { currentPassword, newPassword, confirmNewPassword } = req.body;
+// Endpoint to reset password
+router.post('/reset-password', verifyToken, async (req, res) => {
+  const { userIdLocal, currentPassword, newPassword, confirmNewPassword } = req.body;
 
   // Validasi input
   if (!currentPassword || !newPassword || !confirmNewPassword) {
@@ -151,22 +151,24 @@ router.post('/change-password', verifyToken, async (req, res) => {
   }
 
   try {
-    const userRef = db.collection('users').doc(req.userId);
-    const userDoc = await userRef.get();
+    const userSnapshot = await db.collection("users").where("userId", "==", userIdLocal).get();
 
-    if (!userDoc.exists) {
-      return res.status(400).send('User not found');
+    if (userSnapshot.empty) {
+      return res.status(404).json({ error: 'User not found' });
     }
-
-    const user = userDoc.data();
-    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
-
+  
+    const user = userSnapshot.docs[0].data();
+    const userPassword = user.password;
+    const isPasswordValid = await bcrypt.compare(currentPassword, userPassword);
+  
     if (!isPasswordValid) {
       return res.status(400).send('Current password is incorrect');
     }
-
+  
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-    await userRef.update({ password: hashedNewPassword });
+    
+    // Update kata sandi pengguna
+    await db.collection("users").doc(userSnapshot.docs[0].id).update({ password: hashedNewPassword });
 
     res.status(200).send('Password changed successfully');
   } catch (error) {

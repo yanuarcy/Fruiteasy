@@ -154,7 +154,10 @@ router.post('/reset-password', verifyToken, async (req, res) => {
   }
 
   try {
-    const userSnapshot = await db.collection("users").where("userId", "==", userIdLocal).get();
+    const userCollection = await db.collection('users');
+    const userDocRef = doc (userCollection, userIdLocal);
+
+    await updateDoc(userDocRef, {password: hashedNewPassword});
 
     if (userSnapshot.empty) {
       return res.status(404).json({ error: 'User not found' });

@@ -73,32 +73,38 @@ router.post('/signup', async (req, res) => {
 
 // Endpoint to login
 router.post('/login', async (req, res) => {
-  const { emailOrFullName, password } = req.body;
-
   try {
+    const { emailOrFullName, password } = req.body;
+
+    // Validasi input
+    if (!emailOrFullName || !password) {
+        return res.status(400).json({ error: 'Please enter all data correctly' });
+    }
+
+    // Verifikasi kredensial
     const emailSnapshot = await db.collection("users").where("email", "==", emailOrFullName).get();
     const usernameSnapshot = await db.collection("users").where("fullName", "==", emailOrFullName).get();
 
     const combinedSnapshot = emailSnapshot.docs.concat(usernameSnapshot.docs);
 
     if (combinedSnapshot.length === 0) {
-      return res.status(400).send('No user found with this email or username');
+        return res.status(404).json({ error: 'Data is not found' });
     }
 
-    let user;
-    combinedSnapshot.forEach(doc => {
-      user = doc.data();
-    });
+    const userData = combinedSnapshot[0].data();
+    const hashedPassword = userData.password;
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      return res.status(400).send('Invalid password');
+    // Memeriksa kata sandi
+    const passwordMatch = await bcrypt.compare(password, hashedPassword);
+    if (!passwordMatch) {
+        return res.status(401).json({ error: 'Wrong password' });
     }
 
-    res.status(200).send('Login successful');
+    // Jika berhasil, kirim respons berhasil bersama dengan data pengguna
+    return res.status(200).json({ message: 'Login Success', user: userData });
   } catch (error) {
-    res.status(500).send('Error logging in: ' + error.message);
+      console.error('Error:', error);
+      return res.status(500).json({ error: 'An error occurred during the login process', details: error.message });
   }
 });
 
@@ -134,6 +140,11 @@ router.post('/request-reset-password', async (req, res) => {
 // Endpoint to change password
 router.post('/change-password', verifyToken, async (req, res) => {
   const { currentPassword, newPassword, confirmNewPassword } = req.body;
+
+  // Validasi input
+  if (!currentPassword || !newPassword || !confirmNewPassword) {
+    return res.status(400).json({ error: 'Please enter all data correctly' });
+  }
 
   if (newPassword !== confirmNewPassword) {
     return res.status(400).send('New passwords do not match');

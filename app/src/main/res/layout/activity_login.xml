@@ -17,8 +17,8 @@
         android:layout_marginTop="75dp"
         android:text="@string/title_login"
         android:textColor="@color/orange"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="34sp"
+        android:textStyle="bold|italic"
         android:layout_marginBottom="8dp"/>
 
     <!-- Subtitle -->

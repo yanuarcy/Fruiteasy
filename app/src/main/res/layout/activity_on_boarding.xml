@@ -18,11 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingHorizontal="60dp"
+        android:paddingHorizontal="20dp"
         android:text="@string/title_onboarding"
         android:textColor="@color/orange"
-        android:textSize="34sp"
-        android:textStyle="bold" />
+        android:textSize="40sp"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/descOnBoarding"

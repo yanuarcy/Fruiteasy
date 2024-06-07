@@ -31,17 +31,6 @@ def get_name_data(index):
               19: 'Watermelon'}
     return ourClass[index]
 
-def get_model(dir_models):
-    """
-    load the model
-    input: path file 
-    Return: load models
-    """
-    print(dir_models)
-    #check if file available or not
-    if(os.path.exists(dir_models)):
-        return load_model(dir_models)
-    else :return jsonify({"error" : "File Models is doesn't exits"}), 404
 
 def normalization_image(current_path,size_normalization=(224,224)):
     """Normalization size of image to fit the required models needed
@@ -68,14 +57,17 @@ def load_mymodel(current_path,path_models):
     expand_dimension=normalization_image(current_path)
     images = np.vstack([expand_dimension])
     #load models
-    model=get_model(path_models)
-    #prediction
+    if(os.path.exists(path_models)):
+        model=load_model(path_models)
+    else :return False
+
+    # prediction
     predict = model.predict(images)
     #find the max probabilities from the classes
     predicted_class_index = np.argmax(predict)
     #get the probalities 
-    predicted_class_prob = predict[0][predicted_class_index]
-    return predicted_class_index, predicted_class_prob
+    # predicted_class_prob = predict[0][predicted_class_index]
+    return predicted_class_index
 
 
 
@@ -103,9 +95,14 @@ def predict():
 
     # Save the file
     file_path = secure_filename(imagefile.filename)
+    #save at the images predict
+    file_path=f"images_predict/{file_path}"
     imagefile.save(file_path)
-    predict_class,prob=load_mymodel(file_path,"model/fruits_model.h5")
-    
+    predict_class=load_mymodel(file_path,"../fruits_model.h5")
+    #check if the file does't exist
+    if predict_class ==False :
+        print("The model not found")
+        return jsonify({"error" : "File Models is doesn't exits"}), 404
     #return only name and probabilites
     # return jsonify({'label':get_name_data(predict_class),"probablity":round(prob *100,2)})
     

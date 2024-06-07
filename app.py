@@ -98,7 +98,8 @@ def predict():
     #save at the images predict
     file_path=f"images_predict/{file_path}"
     imagefile.save(file_path)
-    predict_class=load_mymodel(file_path,"../fruits_model.h5")
+    #please change the files right here to find out your model
+    predict_class=load_mymodel(file_path,"./fruits_model.h5")
     #check if the file does't exist
     if predict_class ==False :
         print("The model not found")

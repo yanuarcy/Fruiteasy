@@ -19,23 +19,6 @@ const createCustomID = () => {
   return customID;
 };
 
-// Middleware to verify Firebase ID token
-const verifyToken = async (req, res, next) => {
-  const idToken = req.headers.authorization?.split('Bearer ')[1];
-
-  if (!idToken) {
-    return res.status(401).send('Unauthorized: No token provided');
-  }
-
-  try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.userId = decodedToken.uid;
-    next();
-  } catch (error) {
-    res.status(401).send('Unauthorized: Invalid token');
-  }
-};
-
 // Endpoint to create a new user
 router.post('/signup', async (req, res) => {
   const { username, email, phone, password, confirmPassword } = req.body;
@@ -122,7 +105,7 @@ router.post('/login', async (req, res) => {
 
 // Tahap Pengembangan
 // Endpoint to get user data
-router.get('/profile', verifyToken, async (req, res) => {
+router.get('/profile', async (req, res) => {
   try {
       const userRef = db.collection('users').doc(req.userId);
       const userDoc = await userRef.get();
@@ -150,7 +133,7 @@ router.post('/request-reset-password', async (req, res) => {
 });
 
 // Endpoint to reset password
-router.post('/reset-password', verifyToken, async (req, res) => {
+router.post('/reset-password', async (req, res) => {
   const { uidLocal, currentPassword, newPassword, confirmNewPassword } = req.body;
 
   // Validasi input

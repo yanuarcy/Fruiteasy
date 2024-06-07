@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { admin, db, firebase } = require('./firebase');
+const db = require('./firebase');
+const { admin, firebase } = require('./firebase');
 
 const router = express.Router();
 

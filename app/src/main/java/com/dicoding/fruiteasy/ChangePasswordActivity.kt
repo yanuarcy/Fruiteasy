@@ -20,7 +20,7 @@ import retrofit2.Response
 class ChangePasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reset_password)
+        setContentView(R.layout.activity_change_password)
 
         supportActionBar?.hide()
 

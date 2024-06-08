@@ -4,31 +4,32 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img,img_to_array
 from werkzeug.utils import secure_filename
+import tensorflow as tf
 import os
 
 app = Flask(__name__)
 
 def get_name_data(index):
-    ourClass={0: 'Avocado', 
-              1: 'Banana',
-              2: 'Dragonfruit',
-              3: 'Durian', 
-              4: 'Grape', 
-              5: 'Guava', 
-              6: 'Jackfruit', 
-              7: 'Langsat', 
-              8: 'Mango', 
-              9: 'Mangostan', 
-              10: 'Orange', 
-              11: 'Papaya', 
-              12: 'Pear', 
-              13: 'Pineapple', 
-              14: 'Rambutan', 
-              15: 'Salak', 
-              16: 'Sapodilla', 
-              17: 'Soursop', 
-              18: 'Strawberry', 
-              19: 'Watermelon'}
+    ourClass={0: 'Alpukat',
+                1: 'Anggur',
+                2: 'Durian',
+                3: 'Jambu', 
+                4: 'Jeruk', 
+                5: 'Langsat', 
+                6: 'Mangga', 
+                7: 'Manggis', 
+                8: 'Naga', 
+                9: 'Nanas', 
+                10: 'Nangka', 
+                11: 'Pepaya', 
+                12: 'Pir', 
+                13: 'Pisang', 
+                14: 'Rambutan', 
+                15: 'Salak', 
+                16: 'Sawo', 
+                17: 'Semangka', 
+                18: 'Srikaya', 
+                19: 'Stroberi'}
     return ourClass[index]
 
 
@@ -58,7 +59,7 @@ def load_mymodel(current_path,path_models):
     images = np.vstack([expand_dimension])
     #load models
     if(os.path.exists(path_models)):
-        model=load_model(path_models)
+        model=tf.keras.saving.load_model(path_models)
     else :return False
 
     # prediction
@@ -99,7 +100,7 @@ def predict():
     file_path=f"images_predict/{file_path}"
     imagefile.save(file_path)
     #please change the files right here to find out your model
-    predict_class=load_mymodel(file_path,"./fruits_model.h5")
+    predict_class=load_mymodel(file_path,"../fruiteasyV5.h5")
     #check if the file does't exist
     if predict_class ==False :
         print("The model not found")

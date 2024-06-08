@@ -26,11 +26,19 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.dicoding.fruiteasy.AnalyzingScannerActivity
 import com.dicoding.fruiteasy.AnalyzingScannerActivity.Companion.CAMERAX_RESULT
+import com.dicoding.fruiteasy.api.RetrofitClient
 import com.dicoding.fruiteasy.createCustomTempFile
 import com.dicoding.fruiteasy.databinding.FragmentScannerBinding
 import com.dicoding.fruiteasy.getImageUri
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 
 class ScannerFragment : Fragment() {
@@ -142,6 +150,8 @@ class ScannerFragment : Fragment() {
                     val msg = "Photo saved"
 
                     Toast.makeText(requireContext(), "$msg $savedUri", Toast.LENGTH_LONG).show()
+                    // Call function to upload the image
+//                    uploadImage(photoFile)
                     val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
                     intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
                     startActivity(intent)
@@ -158,6 +168,32 @@ class ScannerFragment : Fragment() {
             }
         )
     }
+
+//    private fun uploadImage(photoFile: File) {
+//        lifecycleScope.launch {
+//            try {
+//                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photoFile)
+//                val body = MultipartBody.Part.createFormData("file", photoFile.name, requestFile)
+//
+//                val response = withContext(Dispatchers.IO) {
+//                    RetrofitClient.instance.uploadImage(body).execute()
+//                }
+//
+//                if (response.isSuccessful) {
+//                    val responseBody = response.body()
+//                    Toast.makeText(requireContext(), "Upload successful: $responseBody", Toast.LENGTH_LONG).show()
+//                    val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
+//                    intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
+//                    startActivity(intent)
+//                } else {
+//                    Toast.makeText(requireContext(), "Upload failed: ${response.message()}", Toast.LENGTH_LONG).show()
+//                }
+//            } catch (e: Exception) {
+//                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+//                Log.e(TAG, "uploadImage: ${e.message}", e)
+//            }
+//        }
+//    }
 
 //    private fun hideSystemUI() {
 //        @Suppress("DEPRECATION")

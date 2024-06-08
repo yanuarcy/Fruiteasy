@@ -49,5 +49,11 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Handle navigation based on intent
+        val navigateTo = intent.getStringExtra("navigateTo")
+        if (navigateTo == "scannerFragment") {
+            navController.navigate(R.id.navigation_scanner)
+        }
     }
 }

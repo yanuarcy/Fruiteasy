@@ -1,5 +1,6 @@
 package com.dicoding.fruiteasy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dicoding.fruiteasy.databinding.ActivityDetailInformationScannerBinding
+import com.dicoding.fruiteasy.ui.scanner.ScannerFragment
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class DetailInformationScannerActivity : AppCompatActivity() {
@@ -65,7 +67,11 @@ class DetailInformationScannerActivity : AppCompatActivity() {
 
         // Back button listener
         binding.backButton.setOnClickListener {
-            finish() // Close the activity when back button is pressed
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("navigateTo", "scannerFragment")
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
         }
 
 

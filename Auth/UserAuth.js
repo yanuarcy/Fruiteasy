@@ -18,6 +18,10 @@ const createCustomID = () => {
   return customID;
 };
 
+// Mailtrap configuration
+const TOKEN = '8f611029e2e95bbb8e6b5abc92bdb8bc';
+const ENDPOINT = "https://send.api.mailtrap.io/";
+
 // Endpoint to request email verification
 router.post('/request-verify-email', async (req, res) => {
   const { username, email, phone, password, confirmPassword } = req.body;

@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const db = require('./firebase');
 
+const { MailtrapClient } = require("mailtrap");
+
 const router = express.Router();
 
 // Function to generate random ID
@@ -19,7 +21,7 @@ const createCustomID = () => {
 };
 
 // Mailtrap configuration
-const TOKEN = '8f611029e2e95bbb8e6b5abc92bdb8bc';
+const TOKEN = '79516c042911bd7aab310ad5b2e100ce';
 const ENDPOINT = "https://send.api.mailtrap.io/";
 
 // Endpoint to request email verification
@@ -40,13 +42,12 @@ router.post('/request-verify-email', async (req, res) => {
   const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
   const sender = {
-    email: "mailtrap@demomailtrap.com",
-    name: "Mailtrap Test",
+    email: "mailtrap@fruiteasy.org",
+    name: "Fruiteasy Team",
   };
   const recipients = [
     {
-      email: 'yanuarcahyo567@gmail.com',
-      // email: email,
+      email: email
     }
   ];
 

@@ -23,11 +23,23 @@ class DetailInformationScannerActivity : AppCompatActivity() {
         bgBlur = findViewById(R.id.bg_blur)
 
         // Set data for views
-        binding.fruitImage.setImageResource(R.drawable.apples_bg_layout)
-        Glide.with(this).load(bgBlur).apply(
-            RequestOptions.bitmapTransform(
-                BlurTransformation(15,2)
-            )).into(bgBlur)
+//        binding.fruitImage.setImageResource(R.drawable.apples_bg_layout)
+        // URL gambar
+        val imageUrl = "https://drive.google.com/uc?export=view&id=1MUd0xbLobXMdWs0TMUGPbrfA17QjLZql"
+
+        // Muat gambar menggunakan Glide
+        Glide.with(this)
+            .load(imageUrl)
+            .into(binding.fruitImage)
+
+
+        // Muat gambar latar belakang dari drawable dan terapkan blur
+        Glide.with(this)
+            .load(R.drawable.overlay_background)
+            .apply(RequestOptions.bitmapTransform(BlurTransformation(15, 2)))
+            .into(bgBlur)
+
+
         binding.fruitType.text = "Fruit"
         binding.latinName.text = "Malus domestica Borkh"
         binding.weight.text = "182g"

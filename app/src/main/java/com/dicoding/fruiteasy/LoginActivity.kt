@@ -106,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                                 Log.d("LoginActivity", "Stored UID: $storedUid")
+                                Log.d("LoginActivity", "Stored UID: $storedId")
                                 Log.d("LoginActivity", "Stored Username: $storedUsername")
                                 Log.d("LoginActivity", "Stored Email: $storedEmail")
                                 Log.d("LoginActivity", "Stored Phone: $storedPhone")
@@ -141,8 +142,8 @@ class LoginActivity : AppCompatActivity() {
             // Handle forgot password click
             Toast.makeText(this, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
             // You can start a new activity or perform some action here
-            // val intent = Intent(this, ForgotPasswordActivity::class.java)
-            // startActivity(intent)
+             val intent = Intent(this, ForgotPasswordActivity::class.java)
+             startActivity(intent)
         }
 
         // Set click listener for the create account text view

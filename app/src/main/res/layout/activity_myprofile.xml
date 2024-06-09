@@ -1,17 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyProfileActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This Is My Profile"
-        android:gravity="center"
-        android:textSize="40sp"
-        />
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Back button and Title -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_chevronleft_black_24"
+                android:contentDescription="Back Button"
+                android:layout_gravity="start"/>
+
+            <TextView
+                android:id="@+id/profileTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:text="My Profile"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+
+        <TextView
+            android:id="@+id/profileSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lengkapi informasi data diri anda apabila belum lengkap"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/phoneNumberLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nomor Telepon"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+                <TextView
+                    android:id="@+id/editPhoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UBAH"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="082257508081"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+            <EditText
+                android:id="@+id/PhoneNumberInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="082257508081"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="phone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/emailLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="8dp" />
+                <TextView
+                    android:id="@+id/editEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UBAH"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="yanuarcahyo567@gmail.com"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+            <EditText
+                android:id="@+id/emailInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="yanuarcahyo567@gmail.com"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/idLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No ID"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1204210134"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/fullNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Lengkap"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="8dp" />
+                <TextView
+                    android:id="@+id/editBioContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UBAH"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/fullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Yanuar"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+            <EditText
+                android:id="@+id/fullNameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Yanuar"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"/>
+
+            <TextView
+                android:id="@+id/genderLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kelamin"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pria"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/genderInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pria"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"/>
+
+            <TextView
+                android:id="@+id/birthDateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Lahir"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/birthDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="17 Agustus 1945"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/birthDateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="17 Agustus 1945"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"/>
+
+            <TextView
+                android:id="@+id/addressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Manukan Kulon"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/addressInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Manukan Kulon"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"/>
+
+            <TextView
+                android:id="@+id/cityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kota / Kabupaten"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Surabaya"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/cityInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Surabaya"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:inputType="text"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

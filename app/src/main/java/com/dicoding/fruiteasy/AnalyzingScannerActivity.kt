@@ -80,7 +80,10 @@ class AnalyzingScannerActivity : AppCompatActivity() {
                         val scaledBitmap = scaleBitmapToWidth(rotatedBitmap, capturedImageView.width)
                         capturedImageView.setImageBitmap(scaledBitmap)
                         capturedImageViewBg.setImageBitmap(scaledBitmap)
-                        Glide.with(this@AnalyzingScannerActivity).load(rotatedBitmap).apply(RequestOptions.bitmapTransform(BlurTransformation(15,2))).into(capturedImageViewBg)
+                        Glide.with(this@AnalyzingScannerActivity)
+                            .load(rotatedBitmap)
+                            .apply(RequestOptions.bitmapTransform(BlurTransformation(15,2)))
+                            .into(capturedImageViewBg)
                         startScannerAnimation()
                     }
                 })

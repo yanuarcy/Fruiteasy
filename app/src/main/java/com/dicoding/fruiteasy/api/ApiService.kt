@@ -2,6 +2,7 @@ package com.dicoding.fruiteasy.api
 
 import com.dicoding.fruiteasy.model.LoginRequest
 import com.dicoding.fruiteasy.model.LoginResponse
+import com.dicoding.fruiteasy.model.RequestResetPasswordLink
 import com.dicoding.fruiteasy.model.ResetPasswordRequest
 import com.dicoding.fruiteasy.model.User
 import okhttp3.MultipartBody
@@ -24,4 +25,10 @@ interface ApiService {
     @Multipart
     @POST("/predict")
     fun uploadImage(@Part file: MultipartBody.Part): Call<String>
+
+    @POST("/UserAuth/edit-profile")
+    fun editProfile(@Body user: User): Call<Void>
+
+    @POST("/UserAuth/request-password-link")
+    fun requestPasswordLink(@Body resetPasswordRequest: RequestResetPasswordLink): Call<Void>
 }

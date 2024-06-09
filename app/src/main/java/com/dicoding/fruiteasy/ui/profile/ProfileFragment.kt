@@ -1,5 +1,6 @@
 package com.dicoding.fruiteasy.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -84,6 +85,19 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+    override fun onResume() {
+        super.onResume()
+        // Load data from SharedPreferences
+        val sharedPref = requireContext().getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+        val username = sharedPref.getString("username", "Fruiteasy")
+        val userId = sharedPref.getString("id", "ID: 1204210134")
+        val userEmail = sharedPref.getString("email", "fruiteasy1@gmail.com")
+
+        // Set data to TextViews
+        binding.username.text = username
+        binding.userId.text = "ID: $userId"
+        binding.userEmail.text = userEmail
     }
 
     private fun performLogout() {

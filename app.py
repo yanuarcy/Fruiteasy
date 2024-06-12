@@ -59,9 +59,9 @@ def load_mymodel(current_path,path_models):
     images = np.vstack([expand_dimension])
     #load models
     if(os.path.exists(path_models)):
-        model=tf.keras.saving.load_model(path_models)
+        model=load_model(path_models)
     else :return False
-
+    
     # prediction
     predict = model.predict(images)
     #find the max probabilities from the classes
@@ -96,8 +96,8 @@ def predict():
 
     # Save the file
     file_path = secure_filename(imagefile.filename)
-    #save at the images predict
-    file_path=f"images_predict/{file_path}"
+    # #save at the images predict
+    # file_path=f"./images_predict/{file_path}"
     imagefile.save(file_path)
     #please change the files right here to find out your model
     predict_class=load_mymodel(file_path,"../fruiteasyV5.h5")
@@ -108,15 +108,17 @@ def predict():
     #return only name and probabilites
     # return jsonify({'label':get_name_data(predict_class),"probablity":round(prob *100,2)})
     
+    #remove files after get predict
+    os.remove(file_path)
     #return directly request to other route
-    return redirect(url_for('fruit_nutrition', fruit=get_name_data(predict_class)))
+    return redirect(url_for('fruit_nutrition', buah=get_name_data(predict_class)))
      
 
 
 @app.route('/nutrisi_buah')
 def fruit_nutrition():
     # mendapatkan parameter 'buah' dari query string
-    buah = request.args.get('fruit')
+    buah = request.args.get('buah')
 
     # mengecek apakah ada parameter yang dimasukkan 
     if not buah:

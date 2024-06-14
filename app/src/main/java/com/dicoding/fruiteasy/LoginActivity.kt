@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -16,10 +17,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        supportActionBar?.hide()
+
+        this.window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
         // Find views by ID
         val emailEditText: EditText = findViewById(R.id.email)
@@ -123,10 +132,10 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(homeIntent)
                                 finish() // Close this activity
                             } else {
-                                Toast.makeText(this@LoginActivity, "Invalid email or password", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity, "Unable to sign-in: Incorrect password", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(this@LoginActivity, "Login Failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@LoginActivity, "Unable to sign-in: Incorrect password", Toast.LENGTH_SHORT).show()
                         }
                     }
 
@@ -140,7 +149,7 @@ class LoginActivity : AppCompatActivity() {
         // Set click listener for the forgot password text view
         forgotPasswordTextView.setOnClickListener {
             // Handle forgot password click
-            Toast.makeText(this, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
             // You can start a new activity or perform some action here
              val intent = Intent(this, ForgotPasswordActivity::class.java)
              startActivity(intent)
@@ -149,7 +158,7 @@ class LoginActivity : AppCompatActivity() {
         // Set click listener for the create account text view
         createAccountTextView.setOnClickListener {
             // Handle create new account click
-            Toast.makeText(this, "Create New Account Clicked", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Create New Account Clicked", Toast.LENGTH_SHORT).show()
             // You can start a new activity here
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)

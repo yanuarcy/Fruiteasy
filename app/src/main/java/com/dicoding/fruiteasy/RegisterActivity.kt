@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.dicoding.fruiteasy.api.RetrofitClient
 import com.dicoding.fruiteasy.model.User
 import com.dicoding.fruiteasy.ui.profile.ProfileFragment
@@ -15,10 +17,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        supportActionBar?.hide()
+
+        this.window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
         // Find views by ID
         val usernameEditText: EditText = findViewById(R.id.username)
@@ -77,8 +87,23 @@ class RegisterActivity : AppCompatActivity() {
                 call.enqueue(object : Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@RegisterActivity, "Verification email sent", Toast.LENGTH_SHORT).show()
-                            finish()
+//                            Toast.makeText(this@RegisterActivity, "Verification email sent", Toast.LENGTH_SHORT).show()
+
+                            val builder = AlertDialog.Builder(this@RegisterActivity)
+                            builder.setTitle("Success")
+                            builder.setMessage("Registration processed. To continue, please check your email for verification.")
+
+                            // Set the positive button (OK button)
+                            builder.setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                                finish() // Finish the activity when OK is clicked
+                            }
+
+                            // Create and show the AlertDialog
+                            val dialog = builder.create()
+                            dialog.show()
+
+//                            finish()
                         } else {
                             Toast.makeText(this@RegisterActivity, "Failed to send verification email: ${response.message()}", Toast.LENGTH_SHORT).show()
                         }
@@ -94,7 +119,7 @@ class RegisterActivity : AppCompatActivity() {
         // Set click listener for the create account text view
         createAccountTextView.setOnClickListener {
             // Handle already have an account click
-            Toast.makeText(this, "Already have an account Clicked", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Already have an account Clicked", Toast.LENGTH_SHORT).show()
             // You can finish this activity or navigate back to the login screen
             finish()  // Close this activity and go back to the previous one
         }

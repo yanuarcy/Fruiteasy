@@ -75,19 +75,19 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
-            android:theme="@style/NoActionBar" />
+             />
         <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:theme="@style/NoActionBar" />
+             />
         <activity
             android:name=".OnBoardingActivity"
             android:exported="false"
-            android:theme="@style/NoActionBar" />
+             />
         <activity
             android:name=".SplashActivity"
             android:exported="true"
-            android:theme="@style/NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

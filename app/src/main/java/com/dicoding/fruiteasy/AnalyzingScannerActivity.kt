@@ -1,6 +1,7 @@
 package com.dicoding.fruiteasy
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -9,22 +10,42 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.exifinterface.media.ExifInterface
+import androidx.lifecycle.lifecycleScope
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dicoding.fruiteasy.api.RetrofitClient
 import jp.wasabeef.glide.transformations.BlurTransformation
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
+import java.io.FileOutputStream
 import java.io.InputStream
 
 @Suppress("DEPRECATION")
 class AnalyzingScannerActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TAG = "CameraActivity"
+        const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
+        const val CAMERAX_RESULT = 200
+        const val EXTRA_RESPONSE_BODY = "extra_response_body"
+    }
 
     private lateinit var capturedImageViewBg: ImageView
     private lateinit var capturedImageView: ImageView
@@ -39,8 +60,10 @@ class AnalyzingScannerActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private var currentStep = 0
+    private var uploadDuration: Long = 0L
 
     private var currentImageUri: Uri? = null
+    private val uploadCompletion = CompletableDeferred<Unit>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +86,16 @@ class AnalyzingScannerActivity : AppCompatActivity() {
         loadingAnimation1 = findViewById(R.id.loading_1)
         loadingAnimation2 = findViewById(R.id.loading_2)
         loadingAnimation3 = findViewById(R.id.loading_3)
+
+//        val responseBody = intent.getStringExtra(EXTRA_RESPONSE_BODY)
+//        Log.i(TAG, "Received response body on Analyzing: $responseBody")
+
+        // Retrieve responseBody from SharedPreferences
+//        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+//        val responseBody = sharedPreferences.getString("responseBody", null)
+//
+//        // Use cameraXImage and responseBody as needed
+//        Log.i(TAG, "Received response body on Analyzing: $responseBody")
 
         // Load the captured image from the previous activity
         currentImageUri = intent.getStringExtra(EXTRA_CAMERAX_IMAGE)?.toUri()
@@ -88,6 +121,7 @@ class AnalyzingScannerActivity : AppCompatActivity() {
                     }
                 })
             }
+            uploadImage(uriToFile(uri, this))
         }
 
         startLoadingAnimation()
@@ -149,15 +183,79 @@ class AnalyzingScannerActivity : AppCompatActivity() {
                         steps[currentStep].setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_check_24, 0, 0, 0)
                         currentStep++
                         handler.post(this)
-                    }, 2000)
+                    }, 8500)
                 } else {
                     // All steps are completed, start the new activity
-                    val intent = Intent(this@AnalyzingScannerActivity, DetailInformationScannerActivity::class.java)
-                    startActivity(intent)
+
+//                    val intent = Intent(this@AnalyzingScannerActivity, DetailInformationScannerActivity::class.java)
+////                    intent.putExtra(DetailInformationScannerActivity.EXTRA_RESPONSE_BODY, responseBody)
+//                    startActivity(intent)
+
+                    lifecycleScope.launch {
+                        // Wait for the upload to complete before moving to the next activity
+                        uploadCompletion.await()
+                        // All steps are completed, start the new activity
+                        val intent = Intent(this@AnalyzingScannerActivity, DetailInformationScannerActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
         }
         handler.post(runnable)
+    }
+
+    private fun uploadImage(photoFile: File) {
+        lifecycleScope.launch {
+            try {
+                val startTime = System.currentTimeMillis()
+                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photoFile)
+                val body = MultipartBody.Part.createFormData("image", photoFile.name, requestFile)
+
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitClient.instance.uploadImage(body).execute()
+                }
+
+                val endTime = System.currentTimeMillis() // End time measurement
+                uploadDuration = endTime - startTime // Calculate duration
+                Log.i(TAG, "Upload duration: $uploadDuration ms")
+
+                if (response.isSuccessful) {
+                    val responseBody = response.body()?.string()
+                    Log.i(TAG, "Upload successful: $responseBody")
+                    Toast.makeText(this@AnalyzingScannerActivity, "Upload successful", Toast.LENGTH_LONG).show()
+                    // Store responseBody in SharedPreferences
+                    val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putString("responseBody", responseBody).apply()
+
+                    // Signal the completion of the upload process
+                    uploadCompletion.complete(Unit)
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Toast.makeText(this@AnalyzingScannerActivity, "Upload failed", Toast.LENGTH_LONG).show()
+                    Log.e(TAG, "Upload failed: ${response.message()} - $errorBody")
+                    // Signal the completion to avoid waiting indefinitely
+                    uploadCompletion.complete(Unit)
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@AnalyzingScannerActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e(TAG, "uploadImage: ${e.message}", e)
+                // Signal the completion to avoid waiting indefinitely
+                uploadCompletion.complete(Unit)
+            }
+        }
+    }
+
+    private fun uriToFile(uri: Uri, context: Context): File {
+        val contentResolver = context.contentResolver
+        val tempFile = createCustomTempFile(context)
+        val inputStream = contentResolver.openInputStream(uri)
+        val outputStream = FileOutputStream(tempFile)
+        inputStream?.use { input ->
+            outputStream.use { output ->
+                input.copyTo(output)
+            }
+        }
+        return tempFile
     }
 
     override fun onDestroy() {
@@ -165,9 +263,5 @@ class AnalyzingScannerActivity : AppCompatActivity() {
         handler.removeCallbacksAndMessages(null)
     }
 
-    companion object {
-        private const val TAG = "CameraActivity"
-        const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
-        const val CAMERAX_RESULT = 200
-    }
+
 }

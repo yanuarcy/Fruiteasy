@@ -1,6 +1,7 @@
 package com.dicoding.fruiteasy.ui.scanner
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -39,7 +40,9 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 import java.io.File
+import java.io.FileOutputStream
 
 class ScannerFragment : Fragment() {
 
@@ -169,31 +172,38 @@ class ScannerFragment : Fragment() {
         )
     }
 
-//    private fun uploadImage(photoFile: File) {
-//        lifecycleScope.launch {
-//            try {
-//                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photoFile)
-//                val body = MultipartBody.Part.createFormData("file", photoFile.name, requestFile)
-//
-//                val response = withContext(Dispatchers.IO) {
-//                    RetrofitClient.instance.uploadImage(body).execute()
-//                }
-//
-//                if (response.isSuccessful) {
-//                    val responseBody = response.body()
-//                    Toast.makeText(requireContext(), "Upload successful: $responseBody", Toast.LENGTH_LONG).show()
-//                    val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
-//                    intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
-//                    startActivity(intent)
-//                } else {
-//                    Toast.makeText(requireContext(), "Upload failed: ${response.message()}", Toast.LENGTH_LONG).show()
-//                }
-//            } catch (e: Exception) {
-//                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
-//                Log.e(TAG, "uploadImage: ${e.message}", e)
-//            }
-//        }
-//    }
+    private fun uploadImage(photoFile: File) {
+        lifecycleScope.launch {
+            try {
+                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photoFile)
+                val body = MultipartBody.Part.createFormData("file", photoFile.name, requestFile)
+
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitClient.instance.uploadImage(body).execute()
+                }
+
+                if (response.isSuccessful) {
+                    val responseBody = response.body()?.string()
+                    Log.i(TAG, "Upload successful: $responseBody")
+                    Toast.makeText(requireContext(), "Upload successful: $responseBody", Toast.LENGTH_LONG).show()
+                    // Store responseBody in SharedPreferences
+                    val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putString("responseBody", responseBody).apply()
+
+                    val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
+                    intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
+                    startActivity(intent)
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Toast.makeText(requireContext(), "Upload failed: ${response.message()}", Toast.LENGTH_LONG).show()
+                    Log.e(TAG, "Upload failed: ${response.message()} - $errorBody")
+                }
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e(TAG, "uploadImage: ${e.message}", e)
+            }
+        }
+    }
 
 //    private fun hideSystemUI() {
 //        @Suppress("DEPRECATION")
@@ -236,12 +246,28 @@ class ScannerFragment : Fragment() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
+//            val file = uriToFile(uri, requireContext())
+//            uploadImage(file)
+            Log.i("Photo Picker", "Media selected : $currentImageUri")
             val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
             intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
             startActivity(intent)
         } else {
             Log.d("Photo Picker", "No media selected")
         }
+    }
+
+    private fun uriToFile(uri: Uri, context: Context): File {
+        val contentResolver = context.contentResolver
+        val tempFile = createCustomTempFile(context)
+        val inputStream = contentResolver.openInputStream(uri)
+        val outputStream = FileOutputStream(tempFile)
+        inputStream?.use { input ->
+            outputStream.use { output ->
+                input.copyTo(output)
+            }
+        }
+        return tempFile
     }
 
     private fun showImage() {

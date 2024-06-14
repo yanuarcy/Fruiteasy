@@ -73,14 +73,14 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 val user = User(uid = "", id = "", username, email, phone, password, confirmPassword, fullName = "", gender = "", dateOfBirth = "", address = "", cities = "")
                 val apiService = RetrofitClient.instance
-                val call = apiService.registerUser(user)
+                val call = apiService.requestVerifyEmail(user)
                 call.enqueue(object : Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@RegisterActivity, "Registration Successful", Toast.LENGTH_SHORT).show()
-                            finish()  // Close this activity and go back to the previous one
+                            Toast.makeText(this@RegisterActivity, "Verification email sent", Toast.LENGTH_SHORT).show()
+                            finish()
                         } else {
-                            Toast.makeText(this@RegisterActivity, "Registration Failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity, "Failed to send verification email: ${response.message()}", Toast.LENGTH_SHORT).show()
                         }
                     }
 

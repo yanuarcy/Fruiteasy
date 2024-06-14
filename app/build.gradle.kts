@@ -15,6 +15,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi = 18
+//        renderscriptSupportModeEnabled = true
     }
 
     buildTypes {
@@ -64,6 +67,8 @@ dependencies {
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
+    implementation("androidx.palette:palette-ktx:1.0.0")
+    implementation("jp.wasabeef:blurry:4.0.0")
 
 //    API
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

@@ -30,14 +30,16 @@
                     android:id="@+id/bg_blur"
                     android:layout_width="match_parent"
                     android:layout_height="245dp"
-                    android:background="@drawable/overlay_background"
-                    android:elevation="4dp" />
+                    android:scaleType="centerCrop"
+                    android:translationZ="1dp" />
 
+                <!-- Content layout placed above the blurred background -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:translationZ="2dp"> <!-- Higher translationZ to bring it to the front -->
 
                     <!-- Back button and Title -->
                     <RelativeLayout
@@ -63,7 +65,6 @@
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
                     </RelativeLayout>
-
 
                     <TextView
                         android:id="@+id/fruit_type"
@@ -98,7 +99,6 @@
                             android:text="182g"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -124,20 +124,23 @@
                             android:text="94.6 kcal"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
-
                     </LinearLayout>
-
-
                 </LinearLayout>
             </FrameLayout>
         </RelativeLayout>
 
         <!-- Content section -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="-10dp"
+            android:background="@drawable/background"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/background"
             android:padding="16dp">
 
             <LinearLayout
@@ -151,17 +154,19 @@
                     android:layout_height="wrap_content"
                     android:text="Serving size"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
                     android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"/>
+                    android:textSize="28sp"
+                    android:textColor="@color/primary"/>
 
                 <TextView
                     android:id="@+id/serving_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="182g"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary"
                     android:layout_marginBottom="16dp"/>
 
             </LinearLayout>
@@ -171,17 +176,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Latin"
-                android:textSize="16sp"
+                android:textSize="28sp"
+                android:fontFamily="@font/poppins_regular"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/primary"/>
 
             <TextView
                 android:id="@+id/latin_name_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Malus domestica Borkh"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/primary"
                 android:layout_marginBottom="16dp"/>
 
             <TextView
@@ -190,16 +197,18 @@
                 android:layout_height="wrap_content"
                 android:text="Nama Lokal"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"/>
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="28sp"
+                android:textColor="@color/primary"/>
 
             <TextView
                 android:id="@+id/local_name_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Buah Apel"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
+                android:textColor="@color/primary"
                 android:layout_marginBottom="16dp"/>
 
             <TextView
@@ -208,16 +217,48 @@
                 android:layout_height="wrap_content"
                 android:text="Manfaat Utama"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"/>
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="28sp"
+                android:textColor="@color/primary"/>
 
             <TextView
                 android:id="@+id/main_benefit_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Buah apel memiliki banyak manfaat utama bagi kesehatan. Kaya akan serat dan vitamin C, apel membantu meningkatkan sistem kekebalan tubuh dan pencernaan. Antioksidan dalam apel dapat mengurangi risiko penyakit kronis seperti kanker dan penyakit jantung. Selain itu, apel juga membantu mengontrol berat badan dan menjaga kesehatan gigi. Dengan mengonsumsi apel secara rutin, Anda dapat memperoleh manfaat kesehatan yang optimal."
-                android:textSize="14sp"
-                android:textColor="@android:color/black"/>
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textColor="@color/primary"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/read_more_layout">
+
+                <TextView
+                    android:id="@+id/read_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Read More"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/orange" />
+
+                <ImageView
+                    android:id="@+id/chevron_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_chevron_down_24"
+                    android:layout_marginStart="4dp"
+                    android:tint="@color/orange" />
+            </LinearLayout>
 
             <!-- Nutritional information -->
             <TextView
@@ -226,8 +267,9 @@
                 android:layout_height="wrap_content"
                 android:text="Zat Gizi Utama"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="28sp"
+                android:textColor="@color/primary"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -247,16 +289,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Vitamin C"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"/>
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"/>
 
                     <TextView
                         android:id="@+id/nutrient_vitamin_a"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Vitamin A"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -264,8 +308,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Zat Besi"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -273,8 +318,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Protein dan Lemak"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
                 </LinearLayout>
 
@@ -289,16 +335,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Medium"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"/>
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"/>
 
                     <TextView
                         android:id="@+id/nutrient_vitamin_a_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kurang"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -306,8 +354,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kurang"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -315,8 +364,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kurang"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -328,8 +378,9 @@
                 android:layout_height="wrap_content"
                 android:text="Potensi untuk Gizi"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="28sp"
+                android:textColor="@color/primary"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -349,16 +400,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ketahanan Tubuh"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"/>
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"/>
 
                     <TextView
                         android:id="@+id/potential_vision"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Penglihatan"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -366,8 +419,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Anemia"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -375,8 +429,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Gizi Buruk"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
                 </LinearLayout>
 
@@ -390,17 +445,19 @@
                         android:id="@+id/potential_immunity_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
                         android:text="Medium"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"/>
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"/>
 
                     <TextView
                         android:id="@+id/potential_vision_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
                         android:text="Kurang"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -408,8 +465,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kurang"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
 
                     <TextView
@@ -417,8 +475,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kurang"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
                         android:layout_marginTop="8dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -430,8 +489,9 @@
                 android:layout_height="wrap_content"
                 android:text="Gizi"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="28sp"
+                android:textColor="@color/primary"
                 android:layout_marginTop="16dp"/>
 
             <LinearLayout
@@ -440,68 +500,195 @@
                 android:orientation="vertical"
                 android:layout_marginTop="8dp">
 
-                <TextView
-                    android:id="@+id/nutrition_carbohydrates"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Karbohidrat     25.1g"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
 
-                <TextView
-                    android:id="@+id/nutrition_calcium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kalsium         10.9mg"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/nutrition_magnesium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Magnesium   9.1mg"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
+                        <TextView
+                            android:id="@+id/nutrition_carbohydrates_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Karbohidrat"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary" />
 
-                <TextView
-                    android:id="@+id/nutrition_vitamin_c"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vitamin C      8.37mg"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
+                        <TextView
+                            android:id="@+id/nutrition_calcium_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kalsium"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
 
-                <TextView
-                    android:id="@+id/nutrition_folate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Folat (B9)     5.4mcg"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
+                        <TextView
+                            android:id="@+id/nutrition_magnesium_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Magnesium"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
 
-                <TextView
-                    android:id="@+id/nutrition_fiber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Serat            4.37g"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
+                        <TextView
+                            android:id="@+id/nutrition_vitamin_c_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vitamin C"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
 
-                <TextView
-                    android:id="@+id/nutrition_water"
-                    android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/nutrition_folate_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Folat (B9)"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/nutrition_fiber_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Serat"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/nutrition_water_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Air"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nutrition_carbohydrates_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="25.1g"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary" />
+
+                        <TextView
+                            android:id="@+id/nutrition_calcium_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="10.9mg"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/nutrition_magnesium_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="9.1mg"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/nutrition_vitamin_c_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="8.37mg"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/nutrition_folate_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="5.4mcg"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/nutrition_fiber_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="4.37g"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:id="@+id/nutrition_water_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="156g"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- Fun Facts Section -->
+            <TextView
+                android:id="@+id/fun_facts_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fun Facts"
+                android:textSize="28sp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border"
+                android:padding="18dp">
+
+                <LinearLayout
+                    android:id="@+id/fun_facts_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Air                156g"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:orientation="vertical">
+                    <!-- Tempat konten fun facts -->
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -58,9 +58,10 @@ def load_mymodel(current_path,path_models):
     expand_dimension=normalization_image(current_path)
     images = np.vstack([expand_dimension])
     #load models
-    if(os.path.exists(path_models)):
-        model=load_model(path_models)
-    else :return False
+    # if(os.path.exists(path_models)):
+    #     model=load_model(path_models)
+    # else :return False
+    model=load_model(path_models)
     
     # prediction
     predict = model.predict(images)
@@ -136,5 +137,30 @@ def fruit_nutrition():
     # jika buah tidak ditemukan makan retirn error
     return jsonify({'error': 'Buah tidak ditemukan'}), 404
 
+@app.route('/content_fruits')
+def content_fruit_preparations():
+    # mendapatkan parameter 'bulan' dari query string
+    bulan = request.args.get('bulan')
+
+    # mengecek apakah ada parameter yang dimasukkan 
+    if not bulan:
+        return jsonify({'error' : 'Harap Masukkan Data Yang Sesuai'}), 400
+    #chcek if the params is int
+    elif not(isinstance(bulan,str) and bulan.isdigit()):
+        return jsonify({'error':'Parameter bulan harus bernilai angka positive'}),400
+    # open and read content.csv
+    with open('csv/content-fruits.csv', 'r', newline='', encoding='utf-8') as content_fruits:
+        reader = csv.DictReader(content_fruits)
+        #collected
+        content=[]
+        # Iterasi untuk mencari data content
+        for row in reader:
+            # jika buah ditemukan pada data-buah.csv maka return JSON
+            if int(row['month']) == int(bulan):
+                content.append(row)
+        
+        if(len(content) !=0):return jsonify(content)
+    # jika buah tidak ditemukan makan retirn error
+    return jsonify({'error': 'Buah tidak ditemukan'}), 404
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

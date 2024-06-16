@@ -60,8 +60,9 @@ def load_mymodel(current_path,path_models):
     #load models
     # if(os.path.exists(path_models)):
     #     model=load_model(path_models)
-    # else :return False
+    # else :return None
     model=load_model(path_models)
+
     
     # prediction
     predict = model.predict(images)
@@ -69,6 +70,7 @@ def load_mymodel(current_path,path_models):
     predicted_class_index = np.argmax(predict)
     #get the probalities 
     # predicted_class_prob = predict[0][predicted_class_index]
+    print(predicted_class_index)
     return predicted_class_index
 
 
@@ -98,12 +100,11 @@ def predict():
     # Save the file
     file_path = secure_filename(imagefile.filename)
     # #save at the images predict
-    # file_path=f"./images_predict/{file_path}"
     imagefile.save(file_path)
     #please change the files right here to find out your model
     predict_class=load_mymodel(file_path,"../fruiteasyV5.h5")
     #check if the file does't exist
-    if predict_class ==False :
+    if predict_class ==None:
         print("The model not found")
         return jsonify({"error" : "File Models is doesn't exits"}), 404
     #return only name and probabilites

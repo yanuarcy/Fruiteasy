@@ -1,17 +1,26 @@
 DATASET
-CombinedV5 (most recent raw dataset): https://drive.google.com/file/d/1T9UONVKcv0wrhewDvIMfvHoLqx7qpCLd/view?usp=sharing
-Complete-ready-to-useV3 (most recent preprocessed dataset): https://drive.google.com/file/d/1T9UONVKcv0wrhewDvIMfvHoLqx7qpCLd/view?usp=sharing
-262-for-test (dataset for testing/ test set): https://drive.google.com/file/d/1_YrDM73BvesGR0nmO_o4QUWv26yydfB4/view?usp=sharing
 
-* How to download using google colab:
+~Raw dataset~
+CombinedV5.zip (DEPRECATED): https://drive.google.com/file/d/1T9UONVKcv0wrhewDvIMfvHoLqx7qpCLd/view?usp=sharing
+CombinedV6.zip (latest): https://drive.google.com/file/d/1KaIHEjQgJUgRcU6YfF_wevzsw2VYvTUI/view?usp=sharing
+
+~Preprocessed dataset~
+Complete-ready-to-useV3.zip (DEPRECATED): https://drive.google.com/file/d/1T9UONVKcv0wrhewDvIMfvHoLqx7qpCLd/view?usp=sharing
+Complete-ready-to-useV4.zip (latest): https://drive.google.com/file/d/1bnnz-AsxpF74U6WouIYl70Nb-nrVr4Io/view?usp=sharing
+
+~Dataset-test~
+262-for-test.zip (DEPRECATED): https://drive.google.com/file/d/1_YrDM73BvesGR0nmO_o4QUWv26yydfB4/view?usp=sharing
+262-for-testV2.zip (latest): https://drive.google.com/file/d/1-IwP2zJb0WK_d4DKeU5ZEEux4VTCucW9/view?usp=sharing
+
+------------------------------------------------------------------------------------
+
+How to download using google colab:
 !gdown --id [link-id]
 
 example how to download CombinedV5:
 !gdown --id '1V7cU9TVmdjLefjiKwpOlh1MIKSBKzk6y'
 
+------------------------------------------------------------------------------------
 
-OUR PRETRAINED MODEL
-FruiteasyV3 (most recent trained model): https://drive.google.com/file/d/16F84c_DzzhPVsDowzbHpRqlaLUyNpscq/view?usp=sharing
-
-to download it using google colab:
-!gdown --id '16F84c_DzzhPVsDowzbHpRqlaLUyNpscq'
+Notes:
+* Latest version based on Indonesian language, for older version uses English

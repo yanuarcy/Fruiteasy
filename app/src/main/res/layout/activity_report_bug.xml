@@ -1,17 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MyProfileActivity">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This Report Bug"
-        android:gravity="center"
-        android:textSize="40sp"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="28dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Back Button and Title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Back Button -->
+            <ImageView
+                android:id="@+id/Back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_chevronleft_black_24"
+                android:contentDescription="Back"
+                android:layout_gravity="start" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Report Bug"
+                android:paddingRight="35dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- Feedback Image -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/bg_report_bug"
+            android:contentDescription="Background Report Bug"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Feedback or Report Bug -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feedback \nor Report Bug"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/orange"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please let us know your feedback or report a bug. Your input is valuable to us!"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            />
+
+        <!-- Email Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="18dp"
+            app:boxBackgroundColor="@color/inputText"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Radio Buttons -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Overall, how did you feel about this service?"
+            android:paddingTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/primary"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/very_comfortable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Very Comfortable" />
+
+            <RadioButton
+                android:id="@+id/comfortable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comfortable" />
+
+            <RadioButton
+                android:id="@+id/neutral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Neutral" />
+
+            <RadioButton
+                android:id="@+id/uncomfortable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uncomfortable" />
+
+            <RadioButton
+                android:id="@+id/very_uncomfortable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Very Uncomfortable" />
+        </RadioGroup>
+
+        <!-- Message Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="18dp"
+            app:boxBackgroundColor="@color/inputText"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:hint="Please describe your feedback or report a bug"
+                android:inputType="textMultiLine"
+                android:minLines="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:backgroundTint="@color/btnColor"
+            android:textColor="@android:color/white"
+            android:paddingVertical="12dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -2,6 +2,7 @@ package com.dicoding.fruiteasy.api
 
 import com.dicoding.fruiteasy.model.LoginRequest
 import com.dicoding.fruiteasy.model.LoginResponse
+import com.dicoding.fruiteasy.model.ReportBugRequest
 import com.dicoding.fruiteasy.model.RequestResetPasswordLink
 import com.dicoding.fruiteasy.model.ResetPasswordRequest
 import com.dicoding.fruiteasy.model.User
@@ -39,6 +40,9 @@ interface ApiService {
 
     @POST("/UserAuth/edit-profile")
     fun editProfile(@Body user: User): Call<Void>
+
+    @POST("/Support/report-bug")
+    fun submitReportBug(@Body reportBugRequest: ReportBugRequest): Call<Void>
 
     @POST("/ForgotPass/request-password-link")
     fun requestPasswordLink(@Body resetPasswordRequest: RequestResetPasswordLink): Call<Void>

@@ -97,6 +97,7 @@ class LoginActivity : AppCompatActivity() {
                                     putString("dateOfBirth", loginResponse.user.dateOfBirth)
                                     putString("address", loginResponse.user.address)
                                     putString("cities", loginResponse.user.cities)
+                                    putBoolean("isLoggedIn", true)
                                     apply()
                                 }
 //                                Log.d("LoginActivity", "User ID: ${loginResponse.user}")
@@ -112,6 +113,7 @@ class LoginActivity : AppCompatActivity() {
                                 val storedDateOfBirth = sharedPref.getString("dateOfBirth", null)
                                 val storedAddress = sharedPref.getString("address", null)
                                 val storedCities = sharedPref.getString("cities", null)
+                                val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
 
 
                                 Log.d("LoginActivity", "Stored UID: $storedUid")
@@ -125,6 +127,8 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("LoginActivity", "Stored DateOfBirth: $storedDateOfBirth")
                                 Log.d("LoginActivity", "Stored Address: $storedAddress")
                                 Log.d("LoginActivity", "Stored Cities: $storedCities")
+                                Log.d("LoginActivity", "isLoggedIn: $isLoggedIn")
+
 
                                 val sharedPref2 = getSharedPreferences("Scanning", Context.MODE_PRIVATE)
                                 val historyData = sharedPref2.getString("historyData", null)

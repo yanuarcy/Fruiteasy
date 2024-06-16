@@ -40,4 +40,9 @@ class OnBoardingActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // Do nothing, hence disabling the back button
+    }
 }

@@ -56,4 +56,9 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.navigation_scanner)
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // Do nothing, hence disabling the back button
+    }
 }

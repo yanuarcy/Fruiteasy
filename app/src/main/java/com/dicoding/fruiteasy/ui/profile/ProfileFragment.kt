@@ -3,6 +3,7 @@ package com.dicoding.fruiteasy.ui.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,10 +101,18 @@ class ProfileFragment : Fragment() {
         // SessionManager.logoutUser()
 
         // Clear SharedPreferences with name "Scanning"
-        val sharedPreferences = requireContext().getSharedPreferences("Scanning", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
+//        val scanning = requireContext().getSharedPreferences("Scanning", Context.MODE_PRIVATE)
+//        val editorScanning = scanning.edit()
+//        editorScanning.clear()
+//        editorScanning.apply()
+
+        // Clear SharedPreferences with name "UserPref"
+        val sharedPref = requireContext().getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            clear()
+            apply()
+        }
+
 
         // Navigate to login screen
         val intent = Intent(requireContext(), LoginActivity::class.java)

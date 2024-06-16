@@ -138,12 +138,12 @@ class DetailInformationScannerActivity : AppCompatActivity() {
 
                 binding.fruitType.text = jsonObject.getString("nama_buah")
                 binding.latinName.text = jsonObject.getString("nama_latin")
-                binding.weight.text = jsonObject.getString("Berat Buah PerGizi")
+                binding.weight.text = jsonObject.getString("Berat_Buah_PerGizi")
                 binding.nutritionValue.text = "Nutrition Value"
                 binding.calories.text = jsonObject.getString("kandungan_energi")
 
                 binding.servingSizeTitle.text = "Serving size"
-                binding.servingSize.text = jsonObject.getString("Berat Buah PerGizi")
+                binding.servingSize.text = jsonObject.getString("Berat_Buah_PerGizi")
                 binding.latinNameTitle.text = "Nama Latin"
                 binding.latinNameValue.text = jsonObject.getString("nama_latin")
                 binding.localNameTitle.text = "Nama Lokal"

@@ -1,6 +1,6 @@
 const express = require('express');
 const csv = require('csv-parser');
-const fs = require('fs');
+const axios = require('axios');
 
 const router = express.Router();
 
@@ -9,19 +9,28 @@ function getDataByMonth(data, month) {
     return data.filter(item => parseInt(item.month) === month);
 }
 // Path ke file CSV
-const csvOlahanBuah = './csv/content-fruits.csv';
+const csvOlahanBuah = process.env.CSV_DATAOLAHAN;
 
 // Fungsi untuk membaca data dari file CSV
-function fetchDataFromCSV(csvFilePath) {
-    return new Promise((resolve, reject) => {
-        const results = [];
+async function fetchDataFromCSV(csvFilePath) {
+    try {
+        const response = await axios({
+            method: 'get',
+            url: csvFilePath,
+            responseType: 'stream'
+        });
 
-        fs.createReadStream(csvFilePath)
-        .pipe(csv())
-        .on('data', (data) => results.push(data))
-        .on('end', () => resolve(results))
-        .on('error', (error) => reject(error));
-    });
+        return new Promise((resolve, reject) => {
+            const results = [];
+            response.data
+                .pipe(csv())
+                .on('data', (data) => results.push(data))
+                .on('end', () => resolve(results))
+                .on('error', (error) => reject(error));
+        });
+    } catch (error) {
+        throw new Error(`Error fetching CSV data: ${error.message}`);
+    }
 }
 
 // Endpoint GET untuk mengambil data berdasarkan bulan saat ini

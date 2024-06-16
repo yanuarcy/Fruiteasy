@@ -11,19 +11,28 @@ require('dotenv').config();
 
 const router = express.Router();
 
-const csvFilePath = './csv/data-buah.csv';
+const csvFilePath = process.env.CSV_DATABUAH;
 
 // Fungsi untuk membaca data dari file CSV
-function fetchDataFromCSV(csvFilePath) {
-    return new Promise((resolve, reject) => {
-        const results = [];
+async function fetchDataFromCSV(csvFilePath) {
+    try {
+        const response = await axios({
+            method: 'get',
+            url: csvFilePath,
+            responseType: 'stream'
+        });
 
-        fs.createReadStream(csvFilePath)
-            .pipe(csv())
-            .on('data', (data) => results.push(data))
-            .on('end', () => resolve(results))
-            .on('error', (error) => reject(error));
-    });
+        return new Promise((resolve, reject) => {
+            const results = [];
+            response.data
+                .pipe(csv())
+                .on('data', (data) => results.push(data))
+                .on('end', () => resolve(results))
+                .on('error', (error) => reject(error));
+        });
+    } catch (error) {
+        throw new Error(`Error fetching CSV data: ${error.message}`);
+    }
 }
 
 // Fungsi untuk mencocokkan nama buah dengan data dari file CSV

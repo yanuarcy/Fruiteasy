@@ -19,10 +19,10 @@ function fetchDataFromCSV(csvFilePath) {
         const results = [];
 
         fs.createReadStream(csvFilePath)
-        .pipe(csv())
-        .on('data', (data) => results.push(data))
-        .on('end', () => resolve(results))
-        .on('error', (error) => reject(error));
+            .pipe(csv())
+            .on('data', (data) => results.push(data))
+            .on('end', () => resolve(results))
+            .on('error', (error) => reject(error));
     });
 }
 
@@ -43,17 +43,34 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Function to generate random ID
+const generateRandomID = () => {
+    const min = 10000; // Minimal angka acak (4 digit)
+    const max = 99999; // Maksimal angka acak (5 digit)
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const createCustomID = () => {
+    const prefix = "220"; // Angka yang akan disisipkan di depan ID
+    const randomNumber = generateRandomID();
+    const customID = `${prefix}${randomNumber}`;
+    return customID;
+};
+
 // Endpoint POST untuk menyimpan riwayat
 router.post('/history', async (req, res) => {
     try {
         const { userLocalid, fruitName } = req.body;
+
+        const historyID = createCustomID().toString();
         const createdAt = new Date().toISOString();
 
         // Simpan data ke Firestore
         const docRef = await db.collection('history').add({
-        userLocalid,
-        fruitName,
-        createdAt
+            historyID,
+            userLocalid,
+            fruitName,
+            createdAt
         });
 
         res.status(201).json({ message: 'Riwayat berhasil disimpan', id: docRef.id });
@@ -68,29 +85,29 @@ router.get('/get-history', async (req, res) => {
     const { userLocalid } = req.query;
 
     try {
-       // Ambil riwayat dari Firestore berdasarkan userLocalid
+        // Ambil riwayat dari Firestore berdasarkan userLocalid
         const historySnapshot = await db.collection('history').where('userLocalid', '==', userLocalid).get();
         if (historySnapshot.empty) {
             return res.status(404).json({ message: 'Belum memiliki riwayat' });
         }
         const history = [];
-    
+
         // Ambil data buah dari CSV
         const fruitData = await fetchDataFromCSV(csvFilePath);
-    
+
         // Gabungkan riwayat dengan data buah
         historySnapshot.forEach(doc => {
             const { userLocalid, fruitName, createdAt } = doc.data();
             const fruit = getFruitData(fruitName, fruitData);
-    
+
             history.push({
-            userLocalid,
-            fruitName,
-            createdAt,
-            fruitData: fruit // Data buah dari CSV
+                userLocalid,
+                fruitName,
+                createdAt,
+                fruitData: fruit // Data buah dari CSV
             });
         });
-    
+
         res.status(200).json(history);
     } catch (error) {
         console.error('Error:', error);

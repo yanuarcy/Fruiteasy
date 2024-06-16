@@ -44,42 +44,36 @@ class ProfileFragment : Fragment() {
         // Setup click listeners for the LinearLayouts
         binding.myProfile.setOnClickListener {
             // Handle My Profile click
-            Toast.makeText(requireContext(), "My Profile clicked", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), MyProfileActivity::class.java)
             startActivity(intent)
         }
 
         binding.changePassword.setOnClickListener {
             // Handle Change Password click
-            Toast.makeText(requireContext(), "Change Password clicked", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), ChangePasswordActivity::class.java)
             startActivity(intent)
         }
 
         binding.historyScanning.setOnClickListener {
             // Handle History Scanning click
-            Toast.makeText(requireContext(), "History Scanning clicked", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), HistoryScanningActivity::class.java)
             startActivity(intent)
         }
 
         binding.reportBug.setOnClickListener {
             // Handle Report Bug click
-            Toast.makeText(requireContext(), "Report Bug clicked", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), ReportBugActivity::class.java)
             startActivity(intent)
         }
 
         binding.contactUs.setOnClickListener {
             // Handle Contact Us click
-            Toast.makeText(requireContext(), "Contact Us clicked", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), ContactUsActivity::class.java)
             startActivity(intent)
         }
 
         binding.logout.setOnClickListener {
             // Handle Log Out click
-            Toast.makeText(requireContext(), "Log Out clicked", Toast.LENGTH_SHORT).show()
             // Perform logout operation
             performLogout()
         }

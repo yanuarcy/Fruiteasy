@@ -126,6 +126,14 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("LoginActivity", "Stored Address: $storedAddress")
                                 Log.d("LoginActivity", "Stored Cities: $storedCities")
 
+                                val sharedPref2 = getSharedPreferences("Scanning", Context.MODE_PRIVATE)
+                                val historyData = sharedPref2.getString("historyData", null)
+                                Log.d("LoginActivity", "historyData: $historyData")
+
+
+
+
+
 
                                 // Navigate to HomeActivity
                                 val homeIntent = Intent(this@LoginActivity, MainActivity::class.java)

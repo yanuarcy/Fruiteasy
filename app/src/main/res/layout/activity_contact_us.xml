@@ -1,17 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyProfileActivity">
+    tools:context=".ContactUsActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This Is Contact Us"
-        android:gravity="center"
-        android:textSize="40sp"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="26dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Back Button and Title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Back Button -->
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_chevronleft_black_24"
+                android:contentDescription="Back" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Contact Us"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginRight="26dp"/>
+        </LinearLayout>
+
+        <!-- Header Image -->
+        <ImageView
+            android:id="@+id/ivHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_contact_us"
+            android:contentDescription="Header Image"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level Up \nYour Knowledge"
+            android:textSize="44sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textStyle="bold"
+            android:textColor="@color/orange"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Email Info -->
+        <TextView
+            android:id="@+id/tvEmailInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You can reach us anytime via Fruiteasy@gmail.com"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/primary"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Name Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            app:boxBackgroundColor="@color/inputText"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:hint="Enter Your Name"
+                android:drawablePadding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            app:boxBackgroundColor="@color/inputText"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:hint="Enter Your Email"
+                android:drawableStart="@drawable/ic_baseline_at_24"
+                android:drawablePadding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Phone Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            app:boxBackgroundColor="@color/inputText"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:hint="Enter Your Phone"
+                android:drawableStart="@drawable/ic_baseline_call_24"
+                android:drawablePadding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Message Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginVertical="8dp"
+            app:boxBackgroundColor="@color/inputText"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+
+                android:hint="How Can We Help You?"
+                android:drawablePadding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Agree to Terms Checkbox -->
+        <CheckBox
+            android:id="@+id/agreeTerms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agree to the terms and conditions"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/contactUsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:textColor="@android:color/white"
+            android:padding="16dp" />
+    </LinearLayout>
+</ScrollView>

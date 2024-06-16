@@ -85,8 +85,8 @@ class DetailInformationScannerActivity : AppCompatActivity() {
 //        // Use cameraXImage and responseBody as needed
 //        Log.i(TAG, "Received response body in DetailInformationScannerActivity: $responseBody")
         // Retrieve responseBody from SharedPreferences
-        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-        val responseBody = sharedPreferences.getString("responseBody", null)
+        val sharedPreferences = getSharedPreferences("Scanning", Context.MODE_PRIVATE)
+        val responseBody = sharedPreferences.getString("historyData", null)
 
         // Use cameraXImage and responseBody as needed
         Log.i(TAG, "Received response body on Detail: $responseBody")

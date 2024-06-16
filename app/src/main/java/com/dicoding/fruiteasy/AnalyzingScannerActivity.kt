@@ -25,6 +25,10 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dicoding.fruiteasy.api.RetrofitClient
+import com.dicoding.fruiteasy.model.LoginRequest
+import com.dicoding.fruiteasy.model.Predict
+import com.dicoding.fruiteasy.model.PredictHistoryRequest
+import com.google.gson.JsonParser
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
@@ -33,9 +37,14 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Suppress("DEPRECATION")
 class AnalyzingScannerActivity : AppCompatActivity() {
@@ -211,6 +220,21 @@ class AnalyzingScannerActivity : AppCompatActivity() {
                 val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photoFile)
                 val body = MultipartBody.Part.createFormData("image", photoFile.name, requestFile)
 
+                val sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+                val getUserLocalId = sharedPref.getString("uid", null)
+                val userLocalid = getUserLocalId.toString()
+//                val userLocalIdBody = RequestBody.create("text/plain".toMediaTypeOrNull(),
+//                    userLocalId.toString()
+//                )
+
+//                val userLocalIdBody = Predict(userLocalId.toString())
+
+                Log.i("UploadImage", "This is UID from Login: $userLocalid")
+                Log.i("UploadImage", "This is UID with Predict Class: $userLocalid")
+
+                Log.i("UploadImage", "This is value from body Image: $body")
+
+
                 val response = withContext(Dispatchers.IO) {
                     RetrofitClient.instance.uploadImage(body).execute()
                 }
@@ -224,8 +248,38 @@ class AnalyzingScannerActivity : AppCompatActivity() {
                     Log.i(TAG, "Upload successful: $responseBody")
                     Toast.makeText(this@AnalyzingScannerActivity, "Upload successful", Toast.LENGTH_LONG).show()
                     // Store responseBody in SharedPreferences
-                    val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putString("responseBody", responseBody).apply()
+                    // Get current date
+//                    val today = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(Date())
+
+                    // Get existing data from SharedPreferences
+                    val sharedPreferences = getSharedPreferences("Scanning", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putString("historyData", responseBody).apply()
+//
+                    // Extract fruitName from responseBody
+                    val jsonParser = JsonParser()
+                    val jsonObject = jsonParser.parse(responseBody).asJsonObject
+                    val fruitName = jsonObject.get("nama_buah").asString
+
+                    Log.i("UploadHistory", "This Is Fruit Name from Data Object: $fruitName")
+
+                    // Prepare data for /Predict/history API call
+//                    val predictHistoryData = PredictHistoryRequest(
+//                        userLocalId = userLocalId ?: "",
+//                        fruitName = fruitName
+//                    )
+
+                    val predictHistoryData = PredictHistoryRequest(userLocalid, fruitName)
+
+                    // Post to /Predict/history
+                    val historyResponse = withContext(Dispatchers.IO) {
+                        RetrofitClient.instance.postPredictHistory(predictHistoryData).execute()
+                    }
+
+                    if (historyResponse.isSuccessful) {
+                        Log.i(TAG, "Predict history post successful")
+                    } else {
+                        Log.e(TAG, "Predict history post failed: ${historyResponse.message()}")
+                    }
 
                     // Signal the completion of the upload process
                     uploadCompletion.complete(Unit)

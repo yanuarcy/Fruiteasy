@@ -172,38 +172,38 @@ class ScannerFragment : Fragment() {
         )
     }
 
-    private fun uploadImage(photoFile: File) {
-        lifecycleScope.launch {
-            try {
-                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photoFile)
-                val body = MultipartBody.Part.createFormData("file", photoFile.name, requestFile)
-
-                val response = withContext(Dispatchers.IO) {
-                    RetrofitClient.instance.uploadImage(body).execute()
-                }
-
-                if (response.isSuccessful) {
-                    val responseBody = response.body()?.string()
-                    Log.i(TAG, "Upload successful: $responseBody")
-                    Toast.makeText(requireContext(), "Upload successful: $responseBody", Toast.LENGTH_LONG).show()
-                    // Store responseBody in SharedPreferences
-                    val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putString("responseBody", responseBody).apply()
-
-                    val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
-                    intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
-                    startActivity(intent)
-                } else {
-                    val errorBody = response.errorBody()?.string()
-                    Toast.makeText(requireContext(), "Upload failed: ${response.message()}", Toast.LENGTH_LONG).show()
-                    Log.e(TAG, "Upload failed: ${response.message()} - $errorBody")
-                }
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
-                Log.e(TAG, "uploadImage: ${e.message}", e)
-            }
-        }
-    }
+//    private fun uploadImage(photoFile: File) {
+//        lifecycleScope.launch {
+//            try {
+//                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photoFile)
+//                val body = MultipartBody.Part.createFormData("file", photoFile.name, requestFile)
+//
+//                val response = withContext(Dispatchers.IO) {
+//                    RetrofitClient.instance.uploadImage(body).execute()
+//                }
+//
+//                if (response.isSuccessful) {
+//                    val responseBody = response.body()?.string()
+//                    Log.i(TAG, "Upload successful: $responseBody")
+//                    Toast.makeText(requireContext(), "Upload successful: $responseBody", Toast.LENGTH_LONG).show()
+//                    // Store responseBody in SharedPreferences
+//                    val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+//                    sharedPreferences.edit().putString("responseBody", responseBody).apply()
+//
+//                    val intent = Intent(requireContext(), AnalyzingScannerActivity::class.java)
+//                    intent.putExtra(AnalyzingScannerActivity.EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
+//                    startActivity(intent)
+//                } else {
+//                    val errorBody = response.errorBody()?.string()
+//                    Toast.makeText(requireContext(), "Upload failed: ${response.message()}", Toast.LENGTH_LONG).show()
+//                    Log.e(TAG, "Upload failed: ${response.message()} - $errorBody")
+//                }
+//            } catch (e: Exception) {
+//                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+//                Log.e(TAG, "uploadImage: ${e.message}", e)
+//            }
+//        }
+//    }
 
 //    private fun hideSystemUI() {
 //        @Suppress("DEPRECATION")

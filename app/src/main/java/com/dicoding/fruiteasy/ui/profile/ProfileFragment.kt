@@ -105,6 +105,12 @@ class ProfileFragment : Fragment() {
         // Example:
         // SessionManager.logoutUser()
 
+        // Clear SharedPreferences with name "Scanning"
+        val sharedPreferences = requireContext().getSharedPreferences("Scanning", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
         // Navigate to login screen
         val intent = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intent)

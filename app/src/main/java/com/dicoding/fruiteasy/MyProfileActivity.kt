@@ -3,6 +3,7 @@ package com.dicoding.fruiteasy
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
@@ -138,6 +139,7 @@ class MyProfileActivity : AppCompatActivity() {
                     Toast.makeText(this@MyProfileActivity, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this@MyProfileActivity, "Profile Update Failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.d("MyProfile", "Error : ${response.message()}")
                 }
             }
 

@@ -1,11 +1,15 @@
 package com.dicoding.fruiteasy.api
 
+import com.dicoding.fruiteasy.model.ContactUsRequest
 import com.dicoding.fruiteasy.model.LoginRequest
 import com.dicoding.fruiteasy.model.LoginResponse
+import com.dicoding.fruiteasy.model.Predict
+import com.dicoding.fruiteasy.model.PredictHistoryRequest
 import com.dicoding.fruiteasy.model.RequestResetPasswordLink
 import com.dicoding.fruiteasy.model.ResetPasswordRequest
 import com.dicoding.fruiteasy.model.User
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -32,6 +36,9 @@ interface ApiService {
     @POST("/Predict/upload")
     fun uploadImage(@Part file: MultipartBody.Part): Call<ResponseBody>
 
+    @POST("Predict/history")
+    fun postPredictHistory(@Body request: PredictHistoryRequest): Call<ResponseBody>
+
     @GET("nutrisi_buah")
     fun getFruitNutrition(
         @Query("fruit") fruit: String
@@ -42,4 +49,7 @@ interface ApiService {
 
     @POST("/ForgotPass/request-password-link")
     fun requestPasswordLink(@Body resetPasswordRequest: RequestResetPasswordLink): Call<Void>
+
+    @POST("/Support/contact-us")
+    fun submitContactUs(@Body contactUsRequest: ContactUsRequest): Call<Void>
 }

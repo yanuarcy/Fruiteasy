@@ -25,6 +25,9 @@
         android:theme="@style/Theme.Fruiteasy"
         tools:targetApi="31">
         <activity
+            android:name=".HistoryScanningDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
         <activity
@@ -74,20 +77,16 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".OnBoardingActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

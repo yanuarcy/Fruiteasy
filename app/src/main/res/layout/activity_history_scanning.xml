@@ -7,16 +7,81 @@
     android:orientation="vertical"
     tools:context=".HistoryScanningActivity">
 
-    <TextView
-        android:id="@+id/emptyMessage"
+    <!-- Back Button and Title -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Maaf Data History Anda Kosong"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="22dp">
+
+        <!-- Back Button -->
+        <ImageView
+            android:id="@+id/Back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_chevronleft_black_24"
+            android:contentDescription="Back"
+            android:layout_gravity="start" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="History Scanning"
+            android:paddingRight="35dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <!-- Lottie Animation for Loading -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimation"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="160dp"
         android:visibility="visible"
+        app:lottie_rawRes="@raw/loading_animation"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed="1"/>
+
+    <!-- Container for Empty State Animation and Message -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="300dp"
-        android:textColor="@color/black"
-        android:layout_gravity="center"/>
+        android:visibility="gone"
+        android:id="@+id/emptyStateContainer">
+
+        <!-- Lottie Animation for Empty State -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/emptyAnimation"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="120dp"
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/empty_animation"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <!-- TextView for Empty Message -->
+        <TextView
+            android:id="@+id/emptyMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Oops... Your history is empty. Start a scan now!"
+            android:visibility="visible"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

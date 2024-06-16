@@ -5,24 +5,7 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <View
-            android:id="@+id/dottedLine"
-            android:layout_width="2.5dp"
-            android:layout_height="0dp"
-            android:background="@drawable/dotted_line"
-            android:layout_weight="1" />
-
-        <View
-            android:layout_width="2.5dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/dotted_line"
-            android:layout_weight="1" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/tvDate"
@@ -30,5 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Date"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
         android:textAppearance="?attr/textAppearanceSubtitle1" />
 </LinearLayout>

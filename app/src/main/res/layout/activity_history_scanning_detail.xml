@@ -1,237 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Image with overlay text -->
-        <RelativeLayout
+        <!-- Back Button and Title -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="22dp">
 
+            <!-- Back Button -->
             <ImageView
-                android:id="@+id/fruit_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/apples_bg_layout"
-                android:contentDescription="Fruit Image"/>
+                android:id="@+id/Back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_chevronleft_black_24"
+                android:contentDescription="Back"
+                android:layout_gravity="start" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <!-- Transparent and blurred overlay -->
-                <ImageView
-                    android:id="@+id/bg_blur"
-                    android:layout_width="match_parent"
-                    android:layout_height="245dp"
-                    android:scaleType="centerCrop"
-                    android:translationZ="1dp" />
-
-                <!-- Content layout placed above the blurred background -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:translationZ="2dp"> <!-- Higher translationZ to bring it to the front -->
-
-                    <!-- Back button and Title -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:id="@+id/back_button"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:contentDescription="back_button"
-                            android:src="@drawable/ic_baseline_chevronleft_24" />
-
-                        <TextView
-                            android:id="@+id/title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="Nutritions"
-                            android:textColor="@android:color/white"
-                            android:textSize="18sp" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/fruit_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/label_fruit"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="4dp"
-                        android:text="Fruit"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/latin_name"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Malus domestica Borkh"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white"
-                            android:textSize="40sp" />
-
-                        <TextView
-                            android:id="@+id/weight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="182g"
-                            android:textColor="@android:color/white"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/nutrition_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Nutrition Value"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/white"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/calories"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="94.6 kcal"
-                            android:textColor="@android:color/white"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
-            </FrameLayout>
-        </RelativeLayout>
-
-        <!-- Content section -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_marginTop="-10dp"
-            android:background="@drawable/background"
-            />
+            <!-- Title -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Detail Information"
+                android:paddingRight="35dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:gravity="center"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:background="@drawable/bg_card"
+            android:elevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-                <TextView
-                    android:id="@+id/serving_size_title"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/imageIcon"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_history" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Serving size"
                     android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textStyle="bold"
-                    android:textSize="28sp"
-                    android:textColor="@color/primary"/>
+                    android:orientation="vertical"
+                    android:paddingLeft="18dp">
 
-                <TextView
-                    android:id="@+id/serving_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="182g"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="18sp"
-                    android:textColor="@color/primary"
-                    android:layout_marginBottom="16dp"/>
+                    <TextView
+                        android:id="@+id/tvScientificName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Malus domestica Borkh"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/primary"/>
 
+                    <TextView
+                        android:id="@+id/tvLocalName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Buah Apel"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingTop="4dp"
+                        android:textColor="@color/primary"/>
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="23 Mei 2024"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="16sp"
+                        android:paddingTop="4dp" />
+                </LinearLayout>
             </LinearLayout>
 
+
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvCaptureID"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Capture ID: 2215218525"-->
+<!--            android:textSize="14sp"-->
+<!--            android:paddingTop="4dp" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_card"
+            android:padding="22dp"
+            android:layout_marginVertical="16dp">
+
             <TextView
-                android:id="@+id/latin_name_title"
+                android:id="@+id/serving_size_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama Latin"
-                android:textSize="28sp"
+                android:text="Serving size"
+                android:layout_weight="1"
                 android:fontFamily="@font/poppins_regular"
                 android:textStyle="bold"
+                android:textSize="28sp"
                 android:textColor="@color/primary"/>
 
             <TextView
-                android:id="@+id/latin_name_value"
+                android:id="@+id/serving_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Malus domestica Borkh"
-                android:textSize="18sp"
+                android:text="182g"
                 android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
                 android:textColor="@color/primary"
                 android:layout_marginBottom="16dp"/>
 
-            <TextView
-                android:id="@+id/local_name_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama Lokal"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="28sp"
-                android:textColor="@color/primary"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_card">
 
             <TextView
-                android:id="@+id/local_name_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Buah Apel"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="18sp"
-                android:textColor="@color/primary"
-                android:layout_marginBottom="16dp"/>
-
-            <TextView
-                android:id="@+id/main_benefit_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Manfaat Utama"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="28sp"
-                android:textColor="@color/primary"/>
-
-            <TextView
-                android:id="@+id/main_benefit_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Buah apel memiliki banyak manfaat utama bagi kesehatan. Kaya akan serat dan vitamin C, apel membantu meningkatkan sistem kekebalan tubuh dan pencernaan. Antioksidan dalam apel dapat mengurangi risiko penyakit kronis seperti kanker dan penyakit jantung. Selain itu, apel juga membantu mengontrol berat badan dan menjaga kesehatan gigi. Dengan mengonsumsi apel secara rutin, Anda dapat memperoleh manfaat kesehatan yang optimal."
+                android:text="Manfaat Utama"
+                android:textSize="28sp"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvBenefits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/primary"
+                android:text="Buah apel memiliki banyak manfaat utama bagi kesehatan. Kaya akan serat dan vitamin C, apel membantu meningkatkan sistem kekebalan tubuh dan pencernaan. Antioksidan dalam apel dapat mengurangi risiko penyakit kronis seperti kanker dan penyakit jantung. Selain itu, apel juga membantu mengontrol berat badan dan menjaga kesehatan gigi. Dengan mengonsumsi apel secara rutin, Anda dapat memperoleh manfaat kesehatan yang optimal."
                 android:maxLines="3"
                 android:ellipsize="end"
-                android:textColor="@color/primary"/>
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:id="@+id/read_more_layout"
@@ -261,18 +197,25 @@
                     android:src="@drawable/ic_chevron_down_24"
                     app:tint="@color/orange" />
             </LinearLayout>
+        </LinearLayout>
 
-            <!-- Nutritional information -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_card">
+
             <TextView
-                android:id="@+id/nutritional_info_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Zat Gizi Utama"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_regular"
                 android:textSize="28sp"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/primary"
-                android:layout_marginTop="16dp"/>
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -372,18 +315,25 @@
                         android:layout_marginTop="8dp"/>
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
 
-            <!-- Nutritional Potential -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_card">
+
             <TextView
-                android:id="@+id/nutritional_potential_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Potensi untuk Gizi"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_regular"
                 android:textSize="28sp"
                 android:textColor="@color/primary"
-                android:layout_marginTop="16dp"/>
+                android:fontFamily="@font/poppins_regular"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -483,18 +433,24 @@
                         android:layout_marginTop="8dp"/>
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
 
-            <!-- Nutrition details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp"
+            android:background="@drawable/bg_card">
+
             <TextView
-                android:id="@+id/nutrition_details_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Gizi"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_regular"
                 android:textSize="28sp"
                 android:textColor="@color/primary"
-                android:layout_marginTop="16dp"/>
+                android:fontFamily="@font/poppins_regular"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -661,7 +617,14 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp"
+            android:layout_marginBottom="18dp">
 
             <!-- Fun Facts Section -->
             <TextView
@@ -693,5 +656,6 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

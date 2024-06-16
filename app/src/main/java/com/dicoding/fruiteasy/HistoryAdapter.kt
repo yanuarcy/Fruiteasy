@@ -1,6 +1,6 @@
-// HistoryAdapter.kt
 package com.dicoding.fruiteasy
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,14 +60,9 @@ class HistoryAdapter(private val items: List<Any>) : RecyclerView.Adapter<Recycl
 
     class DateHeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvDate: TextView = itemView.findViewById(R.id.tvDate)
-        private val dottedLine: View = itemView.findViewById(R.id.dottedLine)
 
         fun bind(dateHeader: DateHeader, itemCount: Int) {
             tvDate.text = dateHeader.date
-            val params = dottedLine.layoutParams
-            val totalHeight = itemCount * itemView.resources.getDimensionPixelSize(R.dimen.history_item_height)
-            params.height = totalHeight
-            dottedLine.layoutParams = params
         }
     }
 
@@ -75,6 +70,8 @@ class HistoryAdapter(private val items: List<Any>) : RecyclerView.Adapter<Recycl
         private val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         private val tvSubtitle: TextView = itemView.findViewById(R.id.tvSubtitle)
         private val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        private val tvTapToDetail: TextView = itemView.findViewById(R.id.tvTapToDetail)
+        private val chevronRight: ImageView = itemView.findViewById(R.id.chevronRight)
 
         fun bind(historyItem: HistoryItem) {
             tvTitle.text = historyItem.title
@@ -82,6 +79,13 @@ class HistoryAdapter(private val items: List<Any>) : RecyclerView.Adapter<Recycl
             Glide.with(itemView.context)
                 .load(historyItem.imageUrl)
                 .into(imageView)
+
+            itemView.setOnClickListener {
+                val context = itemView.context
+                val intent = Intent(context, HistoryScanningDetailActivity::class.java)
+                intent.putExtra("HISTORY_ITEM", historyItem)
+                context.startActivity(intent)
+            }
         }
     }
 }

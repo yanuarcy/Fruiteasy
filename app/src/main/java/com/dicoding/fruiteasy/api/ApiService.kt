@@ -1,6 +1,7 @@
 package com.dicoding.fruiteasy.api
 
 import com.dicoding.fruiteasy.model.ContactUsRequest
+import com.dicoding.fruiteasy.model.HistoryResponse
 import com.dicoding.fruiteasy.model.LoginRequest
 import com.dicoding.fruiteasy.model.LoginResponse
 import com.dicoding.fruiteasy.model.Predict
@@ -21,8 +22,6 @@ import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface ApiService {
-    @POST("/UserAuth/signup")
-    fun registerUser(@Body user: User): Call<Void>
 
     @POST("/UserAuth/request-verify-email")
     fun requestVerifyEmail(@Body user: User): Call<Void>
@@ -40,10 +39,8 @@ interface ApiService {
     @POST("Predict/history")
     fun postPredictHistory(@Body request: PredictHistoryRequest): Call<ResponseBody>
 
-    @GET("nutrisi_buah")
-    fun getFruitNutrition(
-        @Query("fruit") fruit: String
-    ): Call<ResponseBody>
+    @GET("/Predict/get-history")
+    fun getHistory(@Query("userLocalid") userLocalid: String): Call<List<HistoryResponse>>
 
     @POST("/UserAuth/edit-profile")
     fun editProfile(@Body user: User): Call<Void>

@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const db = require('./firebase');
+const db = require('../firebase');
+require('dotenv').config();
 
 const { MailtrapClient } = require("mailtrap");
 
@@ -21,7 +22,7 @@ const createCustomID = () => {
 };
 
 // Mailtrap configuration
-const TOKEN = '79516c042911bd7aab310ad5b2e100ce';
+const TOKEN = process.env.MAILTRAP_TOKEN;
 const ENDPOINT = "https://send.api.mailtrap.io/";
 
 // Endpoint to request email verification
@@ -36,6 +37,13 @@ router.post('/request-verify-email', async (req, res) => {
     return res.status(400).send('Passwords do not match');
   }
 
+  const usersRef = db.collection('users');
+  const snapshotEmail = await usersRef.where('email', '==', email).get();
+
+  if (!snapshotEmail.empty) {
+    return res.status(400).send('Email already in use');
+  }
+  
   // Send verification email using Mailtrap
   const verificationLink = `https://fruiteasy-be-nrw674jbdq-et.a.run.app/UserAuth/signup?username=${username}&email=${email}&phone=${phone}&password=${password}&confirmPassword=${confirmPassword}`;
 

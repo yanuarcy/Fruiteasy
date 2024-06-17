@@ -8,6 +8,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.dicoding.fruiteasy.api.RetrofitClient
 import com.dicoding.fruiteasy.model.RequestResetPasswordLink
 import com.google.android.material.textfield.TextInputEditText
@@ -47,7 +48,35 @@ class ForgotPasswordActivity : AppCompatActivity() {
                             startActivity(Intent(this@ForgotPasswordActivity, LoginActivity::class.java))
                             finish()
                         } else {
-                            Toast.makeText(this@ForgotPasswordActivity, "Failed to send reset link: ${response.message()}", Toast.LENGTH_SHORT).show()
+                            // Handle specific error status codes
+                            val errorMessage = when (response.code()) {
+                                404 -> {
+                                    val errorBody = response.errorBody()?.string()
+                                    if (!errorBody.isNullOrEmpty()) {
+                                        // Check the specific error message
+                                        when {
+                                            errorBody.contains("User not found") -> "We couldn't find an account with that email address. Please double-check and try again."
+                                            else -> "Failed to send reset link: ${response.message()}"
+                                        }
+                                    } else {
+                                        "Failed to send reset link: ${response.message()}"
+                                    }
+                                }
+                                else -> "Failed to send reset link: ${response.message()}"
+                            }
+
+                            val builder = AlertDialog.Builder(this@ForgotPasswordActivity)
+                            builder.setTitle("Error")
+                            builder.setMessage(errorMessage)
+
+                            // Set the positive button (OK button)
+                            builder.setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+
+                            // Create and show the AlertDialog
+                            val dialog = builder.create()
+                            dialog.show()
                         }
                     }
 

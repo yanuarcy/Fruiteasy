@@ -76,44 +76,70 @@ class RegisterActivity : AppCompatActivity() {
             val confirmPassword = confirmPasswordEditText.text.toString().trim()
 
             // Simple validation
-            if (username.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
-            } else if (password != confirmPassword) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
-            } else {
-                val user = User(uid = "", id = "", username, email, phone, password, confirmPassword, fullName = "", gender = "", dateOfBirth = "", address = "", cities = "")
-                val apiService = RetrofitClient.instance
-                val call = apiService.requestVerifyEmail(user)
-                call.enqueue(object : Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        if (response.isSuccessful) {
-//                            Toast.makeText(this@RegisterActivity, "Verification email sent", Toast.LENGTH_SHORT).show()
+//            if (username.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+//                Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
+//            } else if (password != confirmPassword) {
+//                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+//            } else {
+            val user = User(uid = "", id = "", username, email, phone, password, confirmPassword, fullName = "", gender = "", dateOfBirth = "", address = "", cities = "")
+            val apiService = RetrofitClient.instance
+            val call = apiService.requestVerifyEmail(user)
+            call.enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        val builder = AlertDialog.Builder(this@RegisterActivity)
+                        builder.setTitle("Success")
+                        builder.setMessage("Registration processed. To continue, please check your email for verification.")
 
-                            val builder = AlertDialog.Builder(this@RegisterActivity)
-                            builder.setTitle("Success")
-                            builder.setMessage("Registration processed. To continue, please check your email for verification.")
-
-                            // Set the positive button (OK button)
-                            builder.setPositiveButton("OK") { dialog, _ ->
-                                dialog.dismiss()
-                                finish() // Finish the activity when OK is clicked
-                            }
-
-                            // Create and show the AlertDialog
-                            val dialog = builder.create()
-                            dialog.show()
-
-//                            finish()
-                        } else {
-                            Toast.makeText(this@RegisterActivity, "Failed to send verification email: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        // Set the positive button (OK button)
+                        builder.setPositiveButton("OK") { dialog, _ ->
+                            dialog.dismiss()
+                            finish() // Finish the activity when OK is clicked
                         }
-                    }
 
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Toast.makeText(this@RegisterActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                        // Create and show the AlertDialog
+                        val dialog = builder.create()
+                        dialog.show()
+                    } else {
+                        // Handle specific error status codes
+                        val errorMessage = when (response.code()) {
+                            400 -> {
+                                val errorBody = response.errorBody()?.string()
+                                if (!errorBody.isNullOrEmpty()) {
+                                    // Check the specific error message
+                                    when {
+                                        errorBody.contains("Passwords do not match") -> "The passwords you entered do not match. Please make sure both passwords are the same."
+                                        errorBody.contains("Email already in use") -> "The email address you entered is already in use. Please try a different email address or log in if you already have an account."
+                                        errorBody.contains("Please enter all data correctly") -> "It seems like some information is missing or incorrect. Please double-check your entries and try again."
+                                        else -> "Failed to send verification email: ${response.message()}"
+                                    }
+                                } else {
+                                    "Failed to send verification email: ${response.message()}"
+                                }
+                            }
+                            else -> "Failed to send verification email: ${response.message()}"
+                        }
+
+                        val builder = AlertDialog.Builder(this@RegisterActivity)
+                        builder.setTitle("Error")
+                        builder.setMessage(errorMessage)
+
+                        // Set the positive button (OK button)
+                        builder.setPositiveButton("OK") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+
+                        // Create and show the AlertDialog
+                        val dialog = builder.create()
+                        dialog.show()
                     }
-                })
-            }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Toast.makeText(this@RegisterActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+//            }
         }
 
         // Set click listener for the create account text view

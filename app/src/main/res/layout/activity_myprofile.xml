@@ -34,6 +34,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:text="My Profile"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -46,7 +48,9 @@
             android:layout_height="wrap_content"
             android:text="Lengkapi informasi data diri anda apabila belum lengkap"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/primary"
+            android:fontFamily="@font/poppins_regular"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,20 +70,27 @@
                     android:text="Nomor Telepon"
                     android:layout_weight="1"
                     android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginBottom="8dp" />
+
                 <TextView
                     android:id="@+id/editPhoneNumber"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="UBAH"
-                    android:textColor="@android:color/holo_orange_dark"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_height="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/holo_orange_dark" />
             </LinearLayout>
             <TextView
                 android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="082257508081"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical" />
             <EditText
@@ -87,6 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="082257508081"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp"
                 android:visibility="gone"
                 android:inputType="phone" />
@@ -110,13 +123,17 @@
                     android:layout_height="wrap_content"
                     android:text="Email"
                     android:textStyle="bold"
+                    android:textColor="@color/primary"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="18sp"
                     android:layout_weight="1"
                     android:layout_marginBottom="8dp" />
                 <TextView
                     android:id="@+id/editEmail"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="UBAH"
+                    android:layout_height="20dp"
+                    android:textSize="16sp"
                     android:textColor="@android:color/holo_orange_dark"
                     android:layout_gravity="center_vertical" />
             </LinearLayout>
@@ -126,6 +143,8 @@
                 android:layout_height="wrap_content"
                 android:text="yanuarcahyo567@gmail.com"
                 android:textSize="18sp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_gravity="center_vertical" />
             <EditText
                 android:id="@+id/emailInput"
@@ -133,6 +152,8 @@
                 android:layout_height="wrap_content"
                 android:text="yanuarcahyo567@gmail.com"
                 android:textSize="18sp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:visibility="gone"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
@@ -150,6 +171,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No ID"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
@@ -158,6 +182,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1204210134"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -177,21 +203,28 @@
                     android:layout_height="wrap_content"
                     android:text="Nama Lengkap"
                     android:textStyle="bold"
+                    android:textColor="@color/primary"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="18sp"
                     android:layout_weight="1"
                     android:layout_marginBottom="8dp" />
+
                 <TextView
                     android:id="@+id/editBioContent"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
                     android:text="UBAH"
                     android:textColor="@android:color/holo_orange_dark"
-                    android:layout_gravity="center_vertical" />
+                    android:textSize="16sp" />
             </LinearLayout>
             <TextView
                 android:id="@+id/fullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Yanuar"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical" />
             <EditText
@@ -199,6 +232,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Yanuar"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp"
                 android:visibility="gone"
                 android:inputType="text"/>
@@ -208,6 +243,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jenis Kelamin"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
@@ -217,12 +255,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pria"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp" />
             <EditText
                 android:id="@+id/genderInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pria"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp"
                 android:visibility="gone"
                 android:inputType="text"/>
@@ -233,6 +275,9 @@
                 android:layout_height="wrap_content"
                 android:text="Tanggal Lahir"
                 android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -241,6 +286,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="17 Agustus 1945"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp" />
             <EditText
                 android:id="@+id/birthDateInput"
@@ -248,6 +295,8 @@
                 android:layout_height="wrap_content"
                 android:text="17 Agustus 1945"
                 android:textSize="18sp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:visibility="gone"
                 android:inputType="text"/>
 
@@ -257,6 +306,9 @@
                 android:layout_height="wrap_content"
                 android:text="Alamat"
                 android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -265,6 +317,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Manukan Kulon"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp" />
             <EditText
                 android:id="@+id/addressInput"
@@ -272,6 +326,8 @@
                 android:layout_height="wrap_content"
                 android:text="Manukan Kulon"
                 android:textSize="18sp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:visibility="gone"
                 android:inputType="text"/>
 
@@ -281,6 +337,9 @@
                 android:layout_height="wrap_content"
                 android:text="Kota / Kabupaten"
                 android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -289,6 +348,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Surabaya"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp" />
             <EditText
                 android:id="@+id/cityInput"
@@ -296,6 +357,8 @@
                 android:layout_height="wrap_content"
                 android:text="Surabaya"
                 android:textSize="18sp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_regular"
                 android:visibility="gone"
                 android:inputType="text"/>
         </LinearLayout>

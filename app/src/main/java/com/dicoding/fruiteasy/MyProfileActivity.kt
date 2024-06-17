@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.fruiteasy.api.ApiService
 import com.dicoding.fruiteasy.api.RetrofitClient
@@ -138,8 +139,13 @@ class MyProfileActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     Toast.makeText(this@MyProfileActivity, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@MyProfileActivity, "Profile Update Failed: ${response.message()}", Toast.LENGTH_SHORT).show()
-                    Log.d("MyProfile", "Error : ${response.message()}")
+                    val errorMessage = when {
+                        response.errorBody()?.string()?.contains("Field fullName is required") == true -> "Full name is required to update profile."
+                        response.errorBody()?.string()?.contains("User not found") == true -> "User not found. Please check your user ID."
+                        else -> "Profile Update Failed: ${response.message()}"
+                    }
+                    showErrorDialog(errorMessage)
+                    Log.d("MyProfile", "Error: ${response.message()}")
                 }
             }
 
@@ -147,5 +153,20 @@ class MyProfileActivity : AppCompatActivity() {
                 Toast.makeText(this@MyProfileActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun showErrorDialog(message: String) {
+        val builder = AlertDialog.Builder(this@MyProfileActivity)
+        builder.setTitle("Error")
+        builder.setMessage(message)
+
+        // Set the positive button (OK button)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // Create and show the AlertDialog
+        val dialog = builder.create()
+        dialog.show()
     }
 }

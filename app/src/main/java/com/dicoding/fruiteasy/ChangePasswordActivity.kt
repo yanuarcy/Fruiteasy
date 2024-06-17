@@ -1,7 +1,6 @@
 package com.dicoding.fruiteasy
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
@@ -10,7 +9,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.dicoding.fruiteasy.api.RetrofitClient
 import com.dicoding.fruiteasy.model.ResetPasswordRequest
-import com.dicoding.fruiteasy.ui.profile.ProfileFragment
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
@@ -125,10 +123,34 @@ class ChangePasswordActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@ChangePasswordActivity, "Password has been reset successfully!", Toast.LENGTH_SHORT).show()
                         // Navigate to another activity or perform other actions as needed
-                        val profileIntent = Intent(this@ChangePasswordActivity, ProfileFragment::class.java)
-                        startActivity(profileIntent)
+                        // val profileIntent = Intent(this@ChangePasswordActivity, ProfileFragment::class.java)
+                        // startActivity(profileIntent)
+                        finish()
                     } else {
-                        Toast.makeText(this@ChangePasswordActivity, "Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        // Handle specific error status codes
+                        val errorMessage = when (response.code()) {
+                            400 -> {
+                                val errorBody = response.errorBody()?.string()
+                                if (!errorBody.isNullOrEmpty()) {
+                                    // Check the specific error message
+                                    if (errorBody.contains("Current password is incorrect")) {
+                                        "Current password is incorrect"
+                                    } else if (errorBody.contains("New passwords do not match")) {
+                                        "New passwords do not match"
+                                    } else if (errorBody.contains("New password must be different from old password")) {
+                                        "New password must be different from old password"
+                                    } else if (errorBody.contains("Please enter all data correctly")) {
+                                        "Please enter all data correctly"
+                                    } else {
+                                        "Error: ${response.message()}"
+                                    }
+                                } else {
+                                    "Error: ${response.message()}"
+                                }
+                            }
+                            else -> "Error: ${response.message()}"
+                        }
+                        Toast.makeText(this@ChangePasswordActivity, errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }
 

@@ -29,11 +29,16 @@ class ReportBugActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        val sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+        val storedEmail = sharedPref.getString("email", null)
+
         val backButton = findViewById<ImageView>(R.id.Back_button)
         val emailInput: TextInputEditText = findViewById(R.id.email)
         val messageInput: TextInputEditText = findViewById(R.id.message)
         val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
         val submitButton: Button = findViewById(R.id.submit_button)
+
+        emailInput.setText(storedEmail)
 
         // Set back button click listener
         backButton.setOnClickListener {

@@ -1,25 +1,26 @@
 package com.dicoding.fruiteasy
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.Toast
-import com.dicoding.fruiteasy.api.ApiService
 import com.dicoding.fruiteasy.api.RetrofitClient
+import com.dicoding.fruiteasy.databinding.ActivityContactUsBinding
 import com.dicoding.fruiteasy.model.ContactUsRequest
-import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @Suppress("DEPRECATION")
 class ContactUsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityContactUsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_us)
+        binding = ActivityContactUsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.hide()
 
@@ -28,24 +29,23 @@ class ContactUsActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        val backButton: ImageView = findViewById(R.id.backButton)
-        val nameInput: TextInputEditText = findViewById(R.id.name)
-        val emailInput: TextInputEditText = findViewById(R.id.email)
-        val phoneInput: TextInputEditText = findViewById(R.id.phone)
-        val messageInput: TextInputEditText = findViewById(R.id.message)
-        val agreeTerms: CheckBox = findViewById(R.id.agreeTerms)
-        val contactUsButton: Button = findViewById(R.id.contactUsButton)
+        val sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+        val storedEmail = sharedPref.getString("email", null)
+        val storedPhone = sharedPref.getString("phone", null)
 
-        backButton.setOnClickListener {
+        binding.email.setText(storedEmail)
+        binding.phone.setText(storedPhone)
+
+        binding.backButton.setOnClickListener {
             finish()
         }
 
-        contactUsButton.setOnClickListener {
-            val name = nameInput.text.toString().trim()
-            val email = emailInput.text.toString().trim()
-            val phone = phoneInput.text.toString().trim()
-            val message = messageInput.text.toString().trim()
-            val termsAccepted = agreeTerms.isChecked
+        binding.contactUsButton.setOnClickListener {
+            val name = binding.name.text.toString().trim()
+            val email = binding.email.text.toString().trim()
+            val phone = binding.phone.text.toString().trim()
+            val message = binding.message.text.toString().trim()
+            val termsAccepted = binding.agreeTerms.isChecked
 
             if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || message.isEmpty() || !termsAccepted) {
                 Toast.makeText(this, "Please fill all fields and accept the terms.", Toast.LENGTH_SHORT).show()

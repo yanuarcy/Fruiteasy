@@ -10,6 +10,7 @@ function getDataByMonth(data, month) {
 }
 // Path ke file CSV
 const csvOlahanBuah = process.env.CSV_DATAOLAHAN;
+const csvMusimBuah = process.env.CSV_DATAMUSIM;
 
 // Fungsi untuk membaca data dari file CSV
 async function fetchDataFromCSV(csvFilePath) {
@@ -41,11 +42,51 @@ router.get('/content-fruit/current-month', async (req, res) => {
 
         // Ambil data dari CSV
         const data = await fetchDataFromCSV(csvOlahanBuah);
-    
+
         // Cari data berdasarkan bulan saat ini
         const filteredData = getDataByMonth(data, currentMonth);
-    
+
         res.status(200).json(filteredData);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data' });
+    }
+});
+
+// Fungsi untuk mengubah string menjadi array integer
+function stringToArray(data, delimiter = ";") {
+    if (data.trim() === "") {
+        return [];
+    }
+    return data.split(delimiter).map(x => parseInt(x.trim(), 10));
+}
+
+// Endpoint GET untuk musim buah
+router.get('/musim_buah', async (req, res) => {
+    const getBulan = req.query.bulan;
+
+    if (!getBulan) {
+        return res.status(400).json({ error: 'Harap Masukkan Data Yang Sesuai' });
+    } else if (!/^\d+$/.test(getBulan)) {
+        return res.status(400).json({ error: 'Parameter bulan harus bernilai angka positif' });
+    }
+
+    try {
+        const data = await fetchDataFromCSV(csvMusimBuah);
+        const seasonContent = data.filter(season => {
+            const arrayBulan = stringToArray(season['bulan']);
+            return arrayBulan.includes(parseInt(getBulan, 10));
+        }).map(season => ({
+            Buah: season['buah'],
+            Bulan: stringToArray(season['bulan']),
+            Icon: season['icon']
+        }));
+
+        if (seasonContent.length !== 0) {
+            res.json(seasonContent);
+        } else {
+            res.status(404).json({ error: 'Bulan tidak terdaftar saat ini' });
+        }
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data' });

@@ -196,5 +196,6 @@ def string_to_array(data,delimeter=";"):
     if data.strip() == "":
         return []
     return [int(x.strip()) for x in data.split(delimeter)]
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

@@ -163,5 +163,38 @@ def content_fruit_preparations():
         if(len(content) !=0):return jsonify(content)
     # jika buah tidak ditemukan makan retirn error
     return jsonify({'error': 'Buah tidak ditemukan'}), 404
+
+
+@app.route("/musim_buah")
+def musim_buah():
+    "Endpoint to get fruits season and produce some field like  fruit,months,Icons"
+    getBulan=request.args.get("bulan")
+    # mengecek apakah ada parameter yang dimasukkan 
+    if not getBulan:
+        return jsonify({'error' : 'Harap Masukkan Data Yang Sesuai'}), 400
+    #chcek if the params is int
+    elif not(isinstance(getBulan,str) and getBulan.isdigit()):
+        return jsonify({'error':'Parameter bulan harus bernilai angka positive'}),400
+    # open and read content.csv
+    with open('csv/season-content.csv', 'r', newline='', encoding='utf-8') as seasons:
+        readerSeasons = csv.DictReader(seasons)
+        seasonContent=[]
+        for season in readerSeasons:
+            # change months into array
+            arrayBulan=string_to_array(season['bulan'])
+            #chcek if getbulan contain at the season of months
+            if(int(getBulan) in arrayBulan):
+                seasonContent.append({"Buah":season['buah'],"Bulan":arrayBulan,"Icon":season['icon']})
+        
+        if(len(seasonContent) !=0):return jsonify(seasonContent)
+    #condition for months is not found
+    return jsonify({'error': 'Bulan tidak terdafatar saat ini'}), 404
+
+
+def string_to_array(data,delimeter=";"):
+    "to split string to array with delimter ;"
+    if data.strip() == "":
+        return []
+    return [int(x.strip()) for x in data.split(delimeter)]
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

@@ -24,3 +24,9 @@ example how to download CombinedV5:
 
 Notes:
 * Latest version based on Indonesian language, for older version uses English
+* This section only contains the dataset, for our pretrain we move it to /Model/our-pretrained.txt
+
+Big thanks to:
+https://www.kaggle.com/datasets/moltean/fruits
+https://www.kaggle.com/datasets/shimulmbstu/fruitsdataset
+https://www.kaggle.com/datasets/mypapit/harumanismango294dataset

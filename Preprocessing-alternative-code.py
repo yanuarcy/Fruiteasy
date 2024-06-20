@@ -4,9 +4,9 @@ from PIL import Image
 from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
 
 # Define the path to the parent directory
-parent_262_directory = './CombinedV5/262'       # parent direktori dari dataset
-parent_360_directory = './CombinedV5/360'
-tempor_folder = './Complete-ready-to-useV3/'    # parent direktori dari cleaning dataset
+parent_262_directory = './CombinedV6/262'       # parent direktori dari dataset
+parent_360_directory = './CombinedV6/360'
+tempor_folder = './Complete-ready-to-useV4/'    # parent direktori dari cleaning dataset
 IMAGE_SIZE = 224
 
 # List to store the directory names
@@ -86,7 +86,7 @@ def save_images_to_local(output_folder, images, augment=False):
     
     for i, image in enumerate(images):
         img = Image.fromarray(image.astype(np.uint8))
-        if augment==True:
+        if augment:
             img_path = os.path.join(output_folder, f'augmented_image_{i}.jpg')
             img.save(img_path)
         else:

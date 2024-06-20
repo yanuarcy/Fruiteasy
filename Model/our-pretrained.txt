@@ -1,9 +1,10 @@
 OUR PRETRAINED MODEL
 fruiteasyV3.h5 (DEPRECATED): https://drive.google.com/file/d/16F84c_DzzhPVsDowzbHpRqlaLUyNpscq/view?usp=sharing
 fruiteasyV4.h5 (DEPRECATED): https://drive.google.com/file/d/1NI19X0AfudNh_fNmJJ1vQCXw0UrIhJGe/view?usp=sharing
-fruiteasyV5.h5 (latest): https://drive.google.com/file/d/1evWgDsT2Jn9yaYri9_HvsttF4zOoJJcN/view?usp=sharing
-fruiteasyV5.keras (latest): https://drive.google.com/file/d/1tma8F2LZihoq7GJiw6aSWVqR8QS_sGbI/view?usp=sharing
-fruiteasyV5.tflite (latest): https://drive.google.com/file/d/1t0niAjzxxrq321k6gozwaMpYD3GEAMh5/view?usp=sharing
+fruiteasyV5.h5 : https://drive.google.com/file/d/1evWgDsT2Jn9yaYri9_HvsttF4zOoJJcN/view?usp=sharing
+fruiteasyV5.keras : https://drive.google.com/file/d/1tma8F2LZihoq7GJiw6aSWVqR8QS_sGbI/view?usp=sharing
+fruiteasyV5.tflite : https://drive.google.com/file/d/1t0niAjzxxrq321k6gozwaMpYD3GEAMh5/view?usp=sharing
+fruiteasyV6.h5 (latest) : https://drive.google.com/file/d/1B7Jp0Wf-B1fLnvJmdDnVvbIcyd_f0WtG/view?usp=sharing
 
 ------------------------------------------------------------------------------------
 

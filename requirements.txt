@@ -1,0 +1,5 @@
+numpy==1.25.2
+split-folders==0.5.1
+matplotlib==3.7.1
+scikit-learn==1.2.2
+seaborn==0.13.1

@@ -1,0 +1,8 @@
+tensorflow==2.15.0
+keras==2.15.0
+h5py==3.9.0
+numpy==1.24.2
+Flask==3.0.3
+Werkzeug==3.0.3
+google-cloud-storage==2.9.0
+pillow==8.4.0

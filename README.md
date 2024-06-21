@@ -20,6 +20,20 @@ dietary benefits, and potential health benefits.
 ## Deployed Application
 [Fruiteasy APK](https://drive.google.com/drive/folders/1eD9VmJeXOc3etypOGfaoR-STPoQLwkwX?usp=drive_link)
 
+## <img src="https://media.giphy.com/media/HwBlFQZFcAoUcPHZdX/giphy.gif" width="45px"> Tech Stack
+<a href="https://www.cplusplus.com/"><img alt="Python" src="https://img.shields.io/badge/Python-14354C.svg?logo=python&logoColor=blue&color=yellow"></a>
+<a href="https://www.cplusplus.com/"><img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-14354C.svg?logo=kotlin&logoColor=purple&color=orange"></a>
+<a href="https://nodejs.org/en/"><img alt="Nodejs" src="https://img.shields.io/badge/Nodejs-14354C.svg?logo=node.js&logoColor=black&color=darkgreen"></a>
+<a href="https://flask.palletsprojects.com/en/2.1.x/"><img alt="Flask" src="https://img.shields.io/badge/Flask-14354C.svg?logo=flask&logoColor=black&color=white"></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?logo=javascript&logoColor=black"></a>
+
+## Software & Tools
+<a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://media.giphy.com/media/kH1DBkPNyZPOk0BxrM/giphy.gif" alt="git" width="40" height="40"/> </a> 
+<a href="https://www.firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnBjODlpanpmNW9xcHZ0ZWkzaXh6OXFzYWNyMDMxbzEzbGt1MWJrdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Ri2TUcKlaOcaDBxFpY/giphy.gif" alt="firebase" width="40" height="40"/> </a> 
+<a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/></a> 
+<a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDdkcnBqNTN4eDhsaDAwNnd6amF1MWR6NzZmNHNqbTdwOHVvZmM0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/UQJlZ2OcaCA2RLfGiZ/giphy.gif" alt="postman" width="40" height="40"/></a>
+
+
 ## Home Page
 <img src="https://drive.google.com/uc?export=view&id=1QSl5c7uV_d9ZNImhMhEbqvBYGODuxGDZ" width="200"/>
 

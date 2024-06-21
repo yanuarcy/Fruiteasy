@@ -13,8 +13,28 @@ detailed nutritional information, promoting healthier choices and reducing chemi
 ## Preview
 
 Home Page
+![preview](https://drive.google.com/uc?export=view&id=1QSl5c7uV_d9ZNImhMhEbqvBYGODuxGDZ)
 
-![preview](https://github.com/yanuarcy/SolarisTech/blob/c3fc9893ae66d77c3d1e5bbb4693bb294b087ea0/AdminSolarisTech.jpg)
+Scanner Page
+![preview](https://drive.google.com/uc?export=view&id=1g8F76d2PdRDDkC9ftFD3zsCMuGgC5rE6)
+
+Detail Information Scanner Page
+![preview](https://drive.google.com/uc?export=view&id=1X5q9A87BKhaRKRDbG-zOliahUDeGXllL)
+
+History Scanner Page
+![preview](https://drive.google.com/uc?export=view&id=15mjPT4i6KehI06aW_-PkI3CwANnsY8Eu)
+
+Detail Information History Scanner Page
+![preview](https://drive.google.com/uc?export=view&id=1EkM_FFYVg1yz4edFtxge_vxruLflvc5Y)
+
+Email Verify on Email
+![preview](https://drive.google.com/uc?export=view&id=1aA5758stDBIuiT5rTq5CL4J3okumNx2M)
+
+Email Verify Success on Email
+![preview](https://drive.google.com/uc?export=view&id=1ZI-_kGE1d8xOk-KnAUo5quRdtpwCGBws)
+
+Forgot Password Link on Email
+![preview](https://drive.google.com/uc?export=view&id=1aJnsDrr8hR_A4eZDKo1qPB38rqz3JKCD)
 
 ## API
 

@@ -92,18 +92,6 @@ class DetailInformationScannerActivity : AppCompatActivity() {
         Log.i(TAG, "Received response body on Detail: $responseBody")
 
 
-        // Set data for views
-//        binding.fruitImage.setImageResource(R.drawable.apples_bg_layout)
-        // URL gambar
-
-
-
-        // Muat gambar latar belakang dari drawable dan terapkan blur
-//        Glide.with(this)
-//            .load(R.drawable.bgblur_layout)
-//            .apply(RequestOptions.bitmapTransform(BlurTransformation(15, 2)))
-//            .into(bgBlur)
-
         responseBody?.let {
             try {
                 val jsonObject = JSONObject(it)

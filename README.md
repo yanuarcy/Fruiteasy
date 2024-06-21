@@ -20,13 +20,42 @@ Home Page
 
 Here's the API we used into our Apps:
 
-Post
+`Base URL` (https://fruiteasy-be-nrw674jbdq-et.a.run.app)
+
+API for Register Features :
 - `Request Verify Email - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/UserAuth/request-verify-email).
+- `Store Data to Firestore - GET` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/UserAuth/signup)
+
+API for Login Features :
 - `Login - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/UserAuth/login).
+
+API for Forgot Password Features :
+- `Request Email Reset Password - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/ForgotPass/request-password-link)
+- `Response Reset Password View - GET` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/ForgotPass/reset-password-view)
+- `Reset Data Password in Firestore - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/ForgotPass/reset-password-link)
+
+API for Edit MyProfile Features :
 - `Edit Profile - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/UserAuth/edit-profile).
+
+API for Reset Password Features :
 - `Reset Password - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/UserAuth/reset-password).
-- `History - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/Predict/history).
+
+API for Predict Image and Add History Features :
 - `Predict Image - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/Predict/upload).
+- `History - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/Predict/history).
+
+API for Get Data History Features :
+- `Get Data History -GET` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/Predict/get-history)
+
+API for Get Data Fruit Season Features :
+- `Get Data Fruit Season by Month - GET` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/GetContent/musim_buah)
+- `Get Data Content Fruit by Month - GET` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/GetContent/content-fruit/current-month)
+
+API for Report Bug Features :
+- `Sending Email Report Bug - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/Support/report-bug)
+
+API for Contact Us Features :
+- `Sending Email Contact Us - POST` (https://fruiteasy-be-nrw674jbdq-et.a.run.app/Support/contact-us)
 
 ## Setup Project
 

@@ -31,8 +31,8 @@ dietary benefits, and potential health benefits.
 <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://media.giphy.com/media/kH1DBkPNyZPOk0BxrM/giphy.gif" alt="git" width="40" height="40"/> </a> 
 <a href="https://www.firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnBjODlpanpmNW9xcHZ0ZWkzaXh6OXFzYWNyMDMxbzEzbGt1MWJrdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Ri2TUcKlaOcaDBxFpY/giphy.gif" alt="firebase" width="40" height="40"/> </a> 
 <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/></a> 
-<a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDdkcnBqNTN4eDhsaDAwNnd6amF1MWR6NzZmNHNqbTdwOHVvZmM0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/UQJlZ2OcaCA2RLfGiZ/giphy.gif" alt="postman" width="40" height="40"/></a>
-
+<a href="https://developer.android.com/" target="_blank" rel="noreferrer"> <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDdkcnBqNTN4eDhsaDAwNnd6amF1MWR6NzZmNHNqbTdwOHVvZmM0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/UQJlZ2OcaCA2RLfGiZ/giphy.gif" alt="android" width="40" height="40"/></a>
+<a href="https://www.tensorflow.org/" target="_blank" rel="noreferrer"> <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnczbXppdHExNGI1aGVqd2t3cmNpaWVkN3owbnd0dDJoN2N2Z2c4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/SU2ic3wTfuC6JhD1lA/giphy.gif" alt="tensorflow" width="40" height="40"/></a>
 
 ## Home Page
 <img src="https://drive.google.com/uc?export=view&id=1QSl5c7uV_d9ZNImhMhEbqvBYGODuxGDZ" width="200"/>

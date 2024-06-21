@@ -13,28 +13,31 @@ detailed nutritional information, promoting healthier choices and reducing chemi
 ## Preview
 
 ## Home Page
-<img src="https://drive.google.com/uc?export=view&id=1QSl5c7uV_d9ZNImhMhEbqvBYGODuxGDZ" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=1QSl5c7uV_d9ZNImhMhEbqvBYGODuxGDZ" width="200"/>
 
 ## Scanner Page
-<img src="https://drive.google.com/uc?export=view&id=1g8F76d2PdRDDkC9ftFD3zsCMuGgC5rE6" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=1g8F76d2PdRDDkC9ftFD3zsCMuGgC5rE6" width="200"/>
+
+## Profile Page
+<img src="https://drive.google.com/uc?export=view&id=1Occb7YSjVqO4rFs-Y7fZxuHhq27LfKIT" width="200"/>
 
 ## Detail Information Scanner Page
-<img src="https://drive.google.com/uc?export=view&id=1X5q9A87BKhaRKRDbG-zOliahUDeGXllL" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=1X5q9A87BKhaRKRDbG-zOliahUDeGXllL" width="200"/>
 
 ## History Scanner Page
-<img src="https://drive.google.com/uc?export=view&id=15mjPT4i6KehI06aW_-PkI3CwANnsY8Eu" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=15mjPT4i6KehI06aW_-PkI3CwANnsY8Eu" width="200"/>
 
 ## Detail Information History Scanner Page
-<img src="https://drive.google.com/uc?export=view&id=1EkM_FFYVg1yz4edFtxge_vxruLflvc5Y" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=1EkM_FFYVg1yz4edFtxge_vxruLflvc5Y" width="200"/>
 
 ## Email Verify on Email
-<img src="https://drive.google.com/uc?export=view&id=1aA5758stDBIuiT5rTq5CL4J3okumNx2M" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=1aA5758stDBIuiT5rTq5CL4J3okumNx2M" width="200"/>
 
 ## Email Verify Success on Email
-<img src="https://drive.google.com/uc?export=view&id=1ZI-_kGE1d8xOk-KnAUo5quRdtpwCGBws" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=1ZI-_kGE1d8xOk-KnAUo5quRdtpwCGBws" width="200"/>
 
 ## Forgot Password Link on Email
-<img src="https://drive.google.com/uc?export=view&id=1aJnsDrr8hR_A4eZDKo1qPB38rqz3JKCD" width="100"/>
+<img src="https://drive.google.com/uc?export=view&id=1aJnsDrr8hR_A4eZDKo1qPB38rqz3JKCD" width="200"/>
 
 
 ## API

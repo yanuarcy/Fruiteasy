@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/fruitCard1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="16dp">
+
+            <ImageView
+                android:id="@+id/fruit1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_anggur"
+                android:background="@drawable/bg_fruitcard_1"
+                android:contentDescription="Fruit Image"
+                android:padding="6dp"/>
+
+            <TextView
+                android:id="@+id/tvFruit1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Anggur"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fruitCard2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp">
+
+            <ImageView
+                android:id="@+id/fruit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_pir"
+                android:background="@drawable/bg_fruitcard_2"
+                android:contentDescription="Fruit Image"
+                android:padding="6dp"/>
+
+            <TextView
+                android:id="@+id/tvFruit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pir"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fruitCard3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp">
+
+            <ImageView
+                android:id="@+id/fruit3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_pisang"
+                android:background="@drawable/bg_fruitcard_3"
+                android:contentDescription="Fruit Image"
+                android:padding="6dp"/>
+
+            <TextView
+                android:id="@+id/tvFruit3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pisang"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/fruitCard4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="16dp">
+
+            <ImageView
+                android:id="@+id/fruit4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_jeruk"
+                android:background="@drawable/bg_fruitcard_3"
+                android:contentDescription="Fruit Image"
+                android:padding="6dp"/>
+
+            <TextView
+                android:id="@+id/tvFruit4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jeruk"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fruitCard5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="13dp">
+
+            <ImageView
+                android:id="@+id/fruit5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_durian"
+                android:background="@drawable/bg_fruitcard_1"
+                android:contentDescription="Fruit Image"
+                android:padding="6dp"/>
+
+            <TextView
+                android:id="@+id/tvFruit5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Durian"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fruitCard6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="12dp">
+
+            <ImageView
+                android:id="@+id/fruit6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_pepaya"
+                android:background="@drawable/bg_fruitcard_2"
+                android:contentDescription="Fruit Image"
+                android:padding="6dp"/>
+
+            <TextView
+                android:id="@+id/tvFruit6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pepaya"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

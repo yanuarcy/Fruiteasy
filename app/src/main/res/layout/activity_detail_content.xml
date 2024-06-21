@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="26dp">
+
+        <!-- Back Button and Title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:layout_marginBottom="6dp">
+
+            <!-- Back Button -->
+            <ImageView
+                android:id="@+id/Back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_chevronleft_black_24"
+                android:contentDescription="Back"
+                android:layout_gravity="start" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Detail Information"
+                android:paddingRight="35dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageContent"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/img_guava"
+            android:contentDescription="Content Image"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tvContentTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jus Jambu Guava"
+            android:textSize="24sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tvContentBenefit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jus jambu guava kaya akan vitamin C, serat, dan antioksidan yang dapat meningkatkan sistem kekebalan tubuh dan memperbaiki pencernaan."
+            android:textSize="16sp"
+            android:textColor="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textContentIngredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textColor="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvContentIngredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textColor="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/textContentSteps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steps"
+            android:textColor="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvContentSteps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steps"
+            android:textColor="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+</ScrollView>

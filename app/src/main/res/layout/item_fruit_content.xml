@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card"
+    android:layout_marginEnd="16dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/imageContent"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:src="@drawable/img_guava"
+        android:contentDescription="Content Image"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_content"
+        android:layout_marginTop="-15dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tvContentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jus Jambu Guava"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvContentDesc"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Jus jambu guava kaya akan vitamin C, serat, dan antioksidan yang dapat meningkatkan sistem kekebalan tubuh dan memperbaiki pencernaan."
+            android:textSize="14sp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textColor="@color/primary"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+</LinearLayout>

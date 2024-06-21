@@ -25,6 +25,9 @@
         android:theme="@style/Theme.Fruiteasy"
         tools:targetApi="31">
         <activity
+            android:name=".DetailContentActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistoryScanningDetailActivity"
             android:exported="false" />
         <activity

@@ -1,6 +1,8 @@
 package com.dicoding.fruiteasy.api
 
 import com.dicoding.fruiteasy.model.ContactUsRequest
+import com.dicoding.fruiteasy.model.FruitContent
+import com.dicoding.fruiteasy.model.FruitSeason
 import com.dicoding.fruiteasy.model.HistoryResponse
 import com.dicoding.fruiteasy.model.LoginRequest
 import com.dicoding.fruiteasy.model.LoginResponse
@@ -53,4 +55,10 @@ interface ApiService {
 
     @POST("/Support/contact-us")
     fun submitContactUs(@Body contactUsRequest: ContactUsRequest): Call<Void>
+
+    @GET("/GetContent/content-fruit/current-month")
+    fun getFruitContentByCurrentMonth(): Call<List<FruitContent>>
+
+    @GET("/GetContent/musim_buah")
+    fun getFruitSeasonByMonth(@Query("bulan") month: Int): Call<List<FruitSeason>>
 }
